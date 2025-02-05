@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.raihanmahesa.pelanggan.DataPelangganActivity">
+    tools:context="com.raihanmahesa.pegawai.DataPegawaiActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDATA_PELANGGAN"
+        android:id="@+id/rvDATA_PEGAWAI"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/card_data_pelanggan">
+        tools:listitem="@layout/card_data_pegawai">
     </androidx.recyclerview.widget.RecyclerView>
 
     <RelativeLayout
@@ -19,7 +19,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabDATA_PENGGUNA_TambahPelanggan"
+            android:id="@+id/fabDATA_PENGGUNA_TambahPegawai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

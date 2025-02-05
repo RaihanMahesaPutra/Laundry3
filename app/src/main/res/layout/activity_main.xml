@@ -53,7 +53,7 @@
                 android:id="@+id/tvEstimasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estimasi Hari Ini"
+                android:text="@string/card_estimasi"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
@@ -108,13 +108,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Transaksi"
+                        android:text="@string/text_Transaksi"
                         android:textSize="14sp"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
 
-                <!-- Icon 2 -->
+                <!-- Icon Pelanggan -->
                 <LinearLayout
+                    android:id="@+id/pelanggan_menu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,7 +130,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pelanggan"
+                        android:text="@string/text_pelanggan"
                         android:textSize="14sp"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
@@ -150,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Laporan"
+                        android:text="@string/text_laporan"
                         android:textSize="14sp"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
@@ -162,7 +163,7 @@
         android:id="@+id/reminder_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Siap melayani pelanggan dengan setulus hati"
+        android:text="@string/text_siapmelayani"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/cardEstimasi"
@@ -174,7 +175,7 @@
         android:id="@+id/sub_reminder_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jangan Kecewakan Pelanggan"
+        android:text="@string/text_jangankecewakanpelanggan"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/reminder_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -222,7 +223,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Akun"
+                        android:text="@string/text_akun"
                         android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -249,7 +250,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Layanan"
+                        android:text="@string/text_layanan"
                         android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -259,7 +260,7 @@
                 android:layout_height="100dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
-                android:layout_marginStart="17dp">
+                android:layout_marginStart="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -277,7 +278,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Tambahan"
+                        android:text="@string/text_tambahan"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -290,6 +291,7 @@
                 app:cardElevation="4dp">
 
                 <LinearLayout
+                    android:id="@+id/pegawai_menu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -304,7 +306,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Pegawai"
+                        android:text="@string/text_pegawai"
                         android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -331,7 +333,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Cabang"
+                        android:text="@string/card_cabang"
                         android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -341,7 +343,7 @@
                 android:layout_height="100dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
-                android:layout_marginStart="17dp">
+                android:layout_marginStart="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -358,7 +360,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Printer"
+                        android:text="@string/text_printer"
                         android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Laundry</string>
+    <string name="card_pelanggan">Customer ID</string>
+    <string name="card_namapelanggan">Customer Name</string>
+    <string name="card_alamat">Addres</string>
+    <string name="card_nohp">Phone</string>
+    <string name="card_terdaftar">Registered</string>
+    <string name="card_hubungi">Contact</string>
+    <string name="card_lihat">See</string>
+    <string name="card_cabang">Branch</string>
+    <string name="card_estimasi">"Today's Estimates "</string>
+    <string name="text_Transaksi">Transaction</string>
+    <string name="text_pelanggan">Customer</string>
+    <string name="text_laporan">Report</string>
+    <string name="text_akun">Account</string>
+    <string name="text_layanan">Service</string>
+    <string name="text_tambahan">Add</string>
+    <string name="text_pegawai">Employee</string>
+    <string name="text_cabang">Branch</string>
+    <string name="text_printer">Printers</string>
+    <string name="text_siapmelayani">Ready to serve customers wholeheartedly</string>
+    <string name="text_jangankecewakanpelanggan">Don\'t disappoint customers</string>
+    <string name="text_tambahpelanggan">Add Customer</string>
+    <string name="text_namalengkap">"Full Name "</string>
+    <string name="button_simpan">Save</string>
+    <string name="card_pegawai">Employee ID</string>
+    <string name="card_namapegawai">Employee Name</string>
+    <string name="text_tambahpegawai">Add Employee</string>
+</resources>

@@ -1,16 +1,23 @@
-package com.raihanmahesa.laundry
+package com.raihanmahesa
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.raihanmahesa.laundry.R
+import com.raihanmahesa.pegawai.DataPegawaiActivity
+import com.raihanmahesa.pelanggan.DataPelangganActivity
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,12 +29,23 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Set tanggal ke TextView
         val tvDate = findViewById<TextView>(R.id.tvDate)
         tvDate.text = getCurrentDate()
-        // Set ucapan salam ke TextView
+
         val tvGreeting = findViewById<TextView>(R.id.tvGreeting)
         tvGreeting.text = getGreetingMessage()
+
+        val pelangganMenu = findViewById<LinearLayout>(R.id.pelanggan_menu)
+        pelangganMenu.setOnClickListener {
+            val intent = Intent(this, DataPelangganActivity::class.java)
+            startActivity(intent)
+        }
+
+        val pegawaiMenu = findViewById<LinearLayout>(R.id.pegawai_menu)
+        pegawaiMenu.setOnClickListener {
+            val intent = Intent(this, DataPegawaiActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getGreetingMessage(): String {

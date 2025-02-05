@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Laundry</string>
     <string name="card_pelanggan">ID Pelanggan</string>
@@ -10,7 +11,7 @@
     <string name="card_cabang">Cabang</string>
     <string name="card_estimasi">Estimasi Hari Ini</string>
     <string name="text_Transaksi">Transaksi</string>
-    <string name="text_pelanggan">pelanggan</string>
+    <string name="text_pelanggan">Pelanggan</string>
     <string name="text_laporan">Laporan</string>
     <string name="text_akun">Akun</string>
     <string name="text_layanan">Layanan</string>
