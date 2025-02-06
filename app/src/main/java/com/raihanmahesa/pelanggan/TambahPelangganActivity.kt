@@ -1,25 +1,112 @@
 package com.raihanmahesa.pelanggan
-
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.FirebaseDatabase
 import com.raihanmahesa.laundry.R
+import com.raihanmahesa.modeldata.model_pelanggan
 
 class TambahPelangganActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+    val database = FirebaseDatabase.getInstance()
+    val myRef = database.getReference("pelanggan")
+    lateinit var tvJudul: TextView
+    lateinit var etNama: EditText
+    lateinit var etAlamat: EditText
+    lateinit var etNoHP: EditText
+    lateinit var etCabang: EditText
+    lateinit var btSimpan: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_tambah_pelanggan)
+        init()
+        btSimpan.setOnClickListener{
+            cekValidasi()
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+
+    fun init(){
+        tvJudul = findViewById(R.id.tvpelangganjudul)
+        etNama = findViewById(R.id.etpelanggannama)
+        etAlamat = findViewById(R.id.etpelangganalamat)
+        etNoHP = findViewById(R.id.etpelanggannohp)
+        etCabang = findViewById(R.id.etpelanggancabang)
+        btSimpan = findViewById(R.id.btpelanggansimpan)
+    }
+
+    fun cekValidasi() {
+        val nama = etNama.text.toString()
+        val alamat = etAlamat.text.toString()
+        val noHp = etNoHP.text.toString()
+        val cabang = etCabang.text.toString()
+
+        if (nama.isEmpty()) {
+            etNama.error = this.getString(R.string.validasi_nama_pelanggan)
+            Toast.makeText(this, this.getString(R.string.validasi_nama_pelanggan),Toast.LENGTH_SHORT).show()
+            etNama.requestFocus()
+            return
+        }
+        if (alamat.isEmpty()) {
+            etAlamat.error = this.getString(R.string.validasi_alamat_pelanggan)
+            Toast.makeText(this, this.getString(R.string.validasi_alamat_pelanggan),Toast.LENGTH_SHORT).show()
+            etAlamat.requestFocus()
+            return
+        }
+        if (noHp.isEmpty()) {
+            etNoHP.error = this.getString(R.string.validasi_nohp_pelanggan)
+            Toast.makeText(this, this.getString(R.string.validasi_nohp_pelanggan),Toast.LENGTH_SHORT).show()
+            etNoHP.requestFocus()
+            return
+        }
+        if (cabang.isEmpty()) {
+            etCabang.error = this.getString(R.string.validasi_cabang_pelanggan)
+            Toast.makeText(this, this.getString(R.string.validasi_cabang_pelanggan),Toast.LENGTH_SHORT).show()
+            etCabang.requestFocus()
+            return
+        }
+        simpan()
+    }
+
+    fun simpan() {
+        val pelangganBaru = myRef.push()
+        val pelangganid = pelangganBaru.key
+        val data = model_pelanggan(
+            pelangganid.toString(),
+            etNama.text.toString(),
+            etAlamat.text.toString(),
+            etNoHP.text.toString(),
+            etCabang.text.toString(),
+        )
+        pelangganBaru.setValue(data)
+            .addOnSuccessListener {
+                Toast.makeText(
+                    this,
+                this.getString(R.string.tambah_pelanggan_sukses),
+                    Toast.LENGTH_SHORT
+                )
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(
+                    this,
+                this.getString(R.string.tambah_pelanggan_gagal),
+                    Toast.LENGTH_SHORT
+                )
+            }
     }
 }

@@ -23,8 +23,8 @@
         android:id="@+id/tvnama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="22dp"
         android:text="@string/text_namalengkap"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,26 +33,26 @@
 
     <EditText
         android:id="@+id/etnama"
-        android:layout_width="350dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginStart="30dp"
         android:background="@drawable/rounded_edittext"
         android:hint="@string/text_namalengkap"
-        app:layout_constraintTop_toBottomOf="@+id/tvnama"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvnama"
+        app:layout_constraintTop_toBottomOf="@+id/tvjudul"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/tvalamat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="34dp"
         android:text="@string/card_alamat"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etnama"
+        app:layout_constraintTop_toBottomOf="@+id/tvnama"
         tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <EditText
@@ -60,23 +60,23 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="87dp"
         android:background="@drawable/rounded_edittext"
         android:hint="@string/card_alamat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvalamat"
+        app:layout_constraintStart_toEndOf="@+id/tvalamat"
+        app:layout_constraintTop_toBottomOf="@+id/etnama"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/tvnohp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32.5dp"
         android:text="@string/card_nohp"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etalamat"
+        app:layout_constraintTop_toBottomOf="@+id/tvalamat"
         tools:ignore="MissingConstraints,TextSizeCheck" />
 
     <EditText
@@ -84,11 +84,11 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="90.5dp"
         android:background="@drawable/rounded_edittext"
         android:hint="@string/card_nohp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvnohp"
+        app:layout_constraintStart_toEndOf="@id/tvnohp"
+        app:layout_constraintTop_toBottomOf="@+id/etalamat"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <Button
@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:text="@string/button_simpan"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="50dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

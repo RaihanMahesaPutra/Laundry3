@@ -27,4 +27,10 @@
     <string name="card_pegawai">Employee ID</string>
     <string name="card_namapegawai">Employee Name</string>
     <string name="text_tambahpegawai">Add Employee</string>
+    <string name="validasi_nama_pelanggan">Customer name cannot be empty</string>
+    <string name="validasi_alamat_pelanggan">The customer address cannot be empty</string>
+    <string name="validasi_nohp_pelanggan">The customer\'s cellphone number cannot be empty</string>
+    <string name="validasi_cabang_pelanggan">Customer branches cannot be empty</string>
+    <string name="tambah_pelanggan_sukses">add_customer_success</string>
+    <string name="tambah_pelanggan_gagal">add_customer_failed</string>
 </resources>

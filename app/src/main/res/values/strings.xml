@@ -26,4 +26,10 @@
     <string name="card_pegawai">ID Pegawai</string>
     <string name="card_namapegawai">Nama Pegawai</string>
     <string name="text_tambahpegawai">Tambah Pegawai</string>
+    <string name="validasi_nama_pelanggan">Nama pelanggan tidak boleh kosong</string>
+    <string name="validasi_alamat_pelanggan">Alamat pelanggan tidak boleh kosong</string>
+    <string name="validasi_nohp_pelanggan">Nomor HP pelanggan tidak boleh kosong</string>
+    <string name="validasi_cabang_pelanggan">Cabang pelanggan tidak boleh kosong</string>
+    <string name="tambah_pelanggan_sukses">tambah_pelanggan_sukses</string>
+    <string name="tambah_pelanggan_gagal">tambah_pelanggan_gagal</string>
 </resources>
