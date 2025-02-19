@@ -33,4 +33,12 @@
     <string name="validasi_cabang_pelanggan">Cabang pelanggan tidak boleh kosong</string>
     <string name="tambah_pelanggan_sukses">tambah_pelanggan_sukses</string>
     <string name="tambah_pelanggan_gagal">tambah_pelanggan_gagal</string>
+    <string name="validasi_nama_pegawai">validasi_nama_pegawai</string>
+    <string name="validasi_alamat_pegawai">validasi_alamat_pegawai</string>
+    <string name="validasi_nohp_pegawai">validasi_nohp_pegawai</string>
+    <string name="validasi_cabang_pegawai">validasi_cabang_pegawai</string>
+    <string name="Sunting">Sunting</string>
+    <string name="Hapus">Hapus</string>
+    <string name="tambah_pegawai_sukses">tambah_pegawai_sukses</string>
+    <string name="tambah_pegawai_gagal">tambah_pegawai_gagal</string>
 </resources>

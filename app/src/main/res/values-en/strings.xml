@@ -33,4 +33,12 @@
     <string name="validasi_cabang_pelanggan">Customer branches cannot be empty</string>
     <string name="tambah_pelanggan_sukses">add_customer_success</string>
     <string name="tambah_pelanggan_gagal">add_customer_failed</string>
+    <string name="validasi_nama_pegawai">validate_employee_name</string>
+    <string name="validasi_alamat_pegawai">validate_employee_address</string>
+    <string name="validasi_nohp_pegawai">validate_nohp_employee</string>
+    <string name="validasi_cabang_pegawai">validasi_cabang_pegawai</string>
+    <string name="Sunting">Edit</string>
+    <string name="Hapus">Delete</string>
+    <string name="tambah_pegawai_sukses">add_employee_success</string>
+    <string name="tambah_pegawai_gagal">add_employee_failed</string>
 </resources>
