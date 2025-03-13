@@ -1,19 +1,18 @@
 package com.raihanmahesa.pegawai
-import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.FirebaseDatabase
 import com.raihanmahesa.laundry.R
 import com.raihanmahesa.modeldata.model_pegawai
-import com.raihanmahesa.modeldata.model_pelanggan
 
 class TambahPegawaiActivity : AppCompatActivity() {
     val database = FirebaseDatabase.getInstance()
@@ -25,11 +24,14 @@ class TambahPegawaiActivity : AppCompatActivity() {
     lateinit var etCabang: EditText
     lateinit var btSimpan: Button
 
+    var idPegawai: String? = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_tambah_pegawai)
         init()
+        getDate()
         btSimpan.setOnClickListener{
             cekValidasi()
         }
@@ -40,6 +42,43 @@ class TambahPegawaiActivity : AppCompatActivity() {
         }
     }
 
+    fun getDate() {
+        idPegawai = intent.getStringExtra("idPegawai").toString()
+        val judul = intent.getStringExtra("judul")
+        val namaPegawai = intent.getStringExtra("namaPegawai")
+        val alamatPegawai = intent.getStringExtra("alamatPegawai")
+        val noHPPegawai = intent.getStringExtra("noHPPegawai")
+        val idCabang = intent.getStringExtra("idCabang")
+        tvJudul.text = judul
+        etNama.setText(namaPegawai)
+        etAlamat.setText(alamatPegawai)
+        etNoHP.setText(noHPPegawai)
+        etCabang.setText(idCabang)
+        if(!tvJudul.text.equals(this.getString(R.string.tambah_pegawai))){
+            if(judul.equals(this.getString(R.string.edit_pegawai))){
+                mati()
+                btSimpan.text="Sunting"
+            }
+        }else{
+            hidup()
+            etNama.requestFocus()
+            btSimpan.text="Simpan"
+        }
+    }
+
+    fun mati(){
+        etNama.isEnabled = false
+        etAlamat.isEnabled = false
+        etNoHP.isEnabled = false
+        etCabang.isEnabled = false
+    }
+
+    fun hidup() {
+        etNama.isEnabled = true
+        etAlamat.isEnabled = true
+        etNoHP.isEnabled = true
+        etCabang.isEnabled = true
+    }
 
     fun init(){
         tvJudul = findViewById(R.id.tvpegawaijudul)
@@ -80,8 +119,33 @@ class TambahPegawaiActivity : AppCompatActivity() {
             etCabang.requestFocus()
             return
         }
-        simpan()
+        if (btSimpan.text.equals(this.getString(R.string.button_simpan))) {
+            simpan()
+        } else if (btSimpan.text.equals(this.getString(R.string.Sunting))) {
+            hidup()
+            etNama.requestFocus()
+            btSimpan.text = "Perbarui"
+        } else if (btSimpan.text.equals(this.getString(R.string.perbarui))) {
+            update()
+        }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun update() {
+        val pegawaiRef = database.getReference("pegawai").child(idPegawai.toString())
+        // Buat Map untuk update data
+        val updateData = mutableMapOf<String, Any>()
+        updateData["namaPegawai"] = etNama.text.toString()
+        updateData["alamatPegawai"] = etAlamat.text.toString()
+        updateData["noHPPegawai"] = etNoHP.text.toString()
+        updateData["idCabang"] = etCabang.text.toString()
+        pegawaiRef.updateChildren(updateData).addOnSuccessListener {
+                Toast.makeText(this, this.getString(R.string.edit_pegawai_sukses), Toast.LENGTH_SHORT).show()
+                finish()
+            }.addOnFailureListener {
+                Toast.makeText(this, this.getString(R.string.edit_pegawai_gagal), Toast.LENGTH_SHORT).show()
+            }
+        }
 
     fun simpan() {
         val pegawaiBaru = myRef.push()

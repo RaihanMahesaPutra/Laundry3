@@ -1,4 +1,5 @@
-package com.raihanmahesa.pegawai
+package com.raihanmahesa.cabang
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,33 +11,37 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.database.*
-import com.raihanmahesa.adapter.AdapterDataPegawai
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.raihanmahesa.adapter.AdapterDataCabang
 import com.raihanmahesa.laundry.R
-import com.raihanmahesa.modeldata.model_pegawai
+import com.raihanmahesa.layanan.TambahLayananActivity
+import com.raihanmahesa.modeldata.model_cabang
 
-class DataPegawaiActivity : AppCompatActivity() {
+class DataCabangActivity : AppCompatActivity() {
     val database = FirebaseDatabase.getInstance()
-    val myRef = database.getReference("pegawai")
-    lateinit var rvDATA_PEGAWAI: RecyclerView
-    lateinit var fabDATA_PEGAWAI_TambahPegawai: FloatingActionButton
-    lateinit var pegawaiList: ArrayList<model_pegawai>
+    val myRef = database.getReference("cabang")
+    lateinit var rvDATA_CABANG: RecyclerView
+    lateinit var fabDATA_CABANG_TambahCabang: FloatingActionButton
+    lateinit var cabangList: ArrayList<model_cabang>
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_data_pegawai)
+        setContentView(R.layout.activity_data_cabang)
 
         init()
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
-        rvDATA_PEGAWAI.layoutManager = layoutManager
-        rvDATA_PEGAWAI.setHasFixedSize(true)
+        rvDATA_CABANG.layoutManager = layoutManager
+        rvDATA_CABANG.setHasFixedSize(true)
 
-        pegawaiList = arrayListOf<model_pegawai>()
+        cabangList = arrayListOf<model_cabang>()
         getDate()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -45,37 +50,37 @@ class DataPegawaiActivity : AppCompatActivity() {
             insets
         }
 
-        fabDATA_PEGAWAI_TambahPegawai.setOnClickListener {
-            val intent = Intent(this, TambahPegawaiActivity::class.java)
+        fabDATA_CABANG_TambahCabang.setOnClickListener {
+            val intent = Intent(this, TambahCabangActivity::class.java)
             startActivity(intent)
         }
     }
 
     fun init() {
-        rvDATA_PEGAWAI = findViewById(R.id.rvDATA_PEGAWAI)
-        fabDATA_PEGAWAI_TambahPegawai = findViewById(R.id.fabDATA_PENGGUNA_TambahPegawai)
+        rvDATA_CABANG = findViewById(R.id.rvDATA_CABANG)
+        fabDATA_CABANG_TambahCabang = findViewById(R.id.fabDATA_PENGGUNA_TambahCabang)
     }
 
     fun getDate() {
-        val query = myRef.orderByChild("idPegawai").limitToLast(100)
+        val query = myRef.orderByChild("idCabang").limitToLast(100)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    pegawaiList.clear()
+                    cabangList.clear()
                     for (dataSnapshot in snapshot.children) {
-                        val pegawai = dataSnapshot.getValue(model_pegawai::class.java)
-                        if (pegawai != null) {
-                            pegawaiList.add(pegawai)
+                        val cabang = dataSnapshot.getValue(model_cabang::class.java)
+                        if (cabang != null) {
+                            cabangList.add(cabang)
                         }
                     }
-                    val adapter = AdapterDataPegawai(pegawaiList)
-                    rvDATA_PEGAWAI.adapter = adapter
+                    val adapter = AdapterDataCabang(cabangList)
+                    rvDATA_CABANG.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataPegawaiActivity, "Data Gagal Dimuat", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DataCabangActivity, "Data Gagal Dimuat", Toast.LENGTH_SHORT).show()
             }
         })
     }

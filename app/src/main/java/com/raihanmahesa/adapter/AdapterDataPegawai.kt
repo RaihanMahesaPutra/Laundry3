@@ -1,21 +1,28 @@
 package com.raihanmahesa.adapter
+import android.content.Context
+import android.content.Intent
 import com.raihanmahesa.laundry.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DatabaseReference
 import com.raihanmahesa.modeldata.model_pegawai
+import com.raihanmahesa.pegawai.TambahPegawaiActivity
 
 class AdapterDataPegawai(
     private val listPegawai: ArrayList<model_pegawai>) :
-    RecyclerView.Adapter<AdapterDataPegawai.ViewHolder>() {
+RecyclerView.Adapter<AdapterDataPegawai.ViewHolder>() {
+    lateinit var appContext: Context
+    lateinit var databaseReference: DatabaseReference
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_data_pegawai, parent, false)
+        appContext = parent.context
         return ViewHolder(view)
     }
 
@@ -27,6 +34,17 @@ class AdapterDataPegawai(
         holder.tvCARD_PEGAWAI_NOHP.text = item.noHPPegawai
         holder.tvCARD_PEGAWAI_cabang.text = item.idCabang
         holder.cvCARD_PEGAWAI.setOnClickListener {
+        }
+
+        holder.cvCARD_PEGAWAI.setOnClickListener {
+            val intent = Intent(appContext, TambahPegawaiActivity::class.java)
+            intent.putExtra("judul", "Edit Pegawai")
+            intent.putExtra("idPegawai", item.idPegawai)
+            intent.putExtra("namaPegawai", item.namaPegawai)
+            intent.putExtra("alamatPegawai", item.alamatPegawai)
+            intent.putExtra("noHPPegawai", item.noHPPegawai)
+            intent.putExtra("idCabang", item.idCabang)
+            appContext.startActivity(intent)
         }
     }
 

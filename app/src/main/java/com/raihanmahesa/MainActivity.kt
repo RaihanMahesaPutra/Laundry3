@@ -9,9 +9,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.raihanmahesa.cabang.DataCabangActivity
 import com.raihanmahesa.laundry.R
+import com.raihanmahesa.layanan.DataLayananActivity
 import com.raihanmahesa.pegawai.DataPegawaiActivity
 import com.raihanmahesa.pelanggan.DataPelangganActivity
+import com.raihanmahesa.tambahan.DataTambahanActivity
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -44,6 +47,24 @@ class MainActivity : AppCompatActivity() {
         val pegawaiMenu = findViewById<LinearLayout>(R.id.pegawai_menu)
         pegawaiMenu.setOnClickListener {
             val intent = Intent(this, DataPegawaiActivity::class.java)
+            startActivity(intent)
+        }
+
+        val layananMenu = findViewById<LinearLayout>(R.id.layanan_menu)
+        layananMenu.setOnClickListener {
+            val intent = Intent(this, DataLayananActivity::class.java)
+            startActivity(intent)
+        }
+
+        val cabangMenu = findViewById<LinearLayout>(R.id.cabang_menu)
+        cabangMenu.setOnClickListener {
+            val intent = Intent(this, DataCabangActivity::class.java)
+            startActivity(intent)
+        }
+
+        val tambahanMenu = findViewById<LinearLayout>(R.id.tambahan_menu)
+        tambahanMenu.setOnClickListener {
+            val intent = Intent(this, DataTambahanActivity::class.java)
             startActivity(intent)
         }
     }

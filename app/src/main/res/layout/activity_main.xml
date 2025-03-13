@@ -12,7 +12,7 @@
         android:id="@+id/tvGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selamat Pagi"
+        android:text="@string/selamatpagi"
         android:layout_marginTop="50dp"
         android:layout_marginStart="20dp"
         android:textSize="20sp"
@@ -236,6 +236,7 @@
                 android:layout_marginStart="-248dp">
 
                 <LinearLayout
+                    android:id="@+id/layanan_menu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -263,6 +264,7 @@
                 android:layout_marginStart="20dp">
 
                 <LinearLayout
+                    android:id="@+id/tambahan_menu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_row="0"
@@ -319,6 +321,7 @@
                 android:layout_marginStart="-248dp">
 
                 <LinearLayout
+                    android:id="@+id/cabang_menu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"

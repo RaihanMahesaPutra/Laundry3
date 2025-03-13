@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,10 +14,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
-        <activity android:name="com.raihanmahesa.pegawai.TambahPegawaiActivity" />
-        <activity android:name="com.raihanmahesa.pegawai.DataPegawaiActivity" />
-        <activity android:name="com.raihanmahesa.pelanggan.TambahPelangganActivity" />
-        <activity android:name="com.raihanmahesa.pelanggan.DataPelangganActivity" />
+        <activity
+            android:name="com.raihanmahesa.tambahan.TambahTambahanActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.tambahan.DataTambahanActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.cabang.TambahCabangActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.cabang.DataCabangActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.layanan.TambahLayananActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.layanan.DataLayananActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.pegawai.TambahPegawaiActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.pegawai.DataPegawaiActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.pelanggan.TambahPelangganActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.raihanmahesa.pelanggan.DataPelangganActivity"
+            android:exported="false" />
         <activity
             android:name="com.raihanmahesa.MainActivity"
             android:exported="true">
