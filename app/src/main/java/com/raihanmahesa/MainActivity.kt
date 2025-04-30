@@ -15,6 +15,7 @@ import com.raihanmahesa.layanan.DataLayananActivity
 import com.raihanmahesa.pegawai.DataPegawaiActivity
 import com.raihanmahesa.pelanggan.DataPelangganActivity
 import com.raihanmahesa.tambahan.DataTambahanActivity
+import com.raihanmahesa.transaksi.DataTransaksiActivity
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -65,6 +66,12 @@ class MainActivity : AppCompatActivity() {
         val tambahanMenu = findViewById<LinearLayout>(R.id.tambahan_menu)
         tambahanMenu.setOnClickListener {
             val intent = Intent(this, DataTambahanActivity::class.java)
+            startActivity(intent)
+        }
+
+        val transaksiMenu = findViewById<LinearLayout>(R.id.transaksi_menu)
+        transaksiMenu.setOnClickListener {
+            val intent = Intent(this, DataTransaksiActivity::class.java)
             startActivity(intent)
         }
     }

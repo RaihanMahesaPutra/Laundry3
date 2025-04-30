@@ -13,7 +13,7 @@ import com.raihanmahesa.pegawai.TambahPegawaiActivity
 
 class AdapterDataPegawai(
     private val listPegawai: ArrayList<model_pegawai>) :
-RecyclerView.Adapter<AdapterDataPegawai.ViewHolder>() {
+    RecyclerView.Adapter<AdapterDataPegawai.ViewHolder>() {
     lateinit var appContext: Context
     lateinit var databaseReference: DatabaseReference
     override fun onCreateViewHolder(
@@ -33,8 +33,6 @@ RecyclerView.Adapter<AdapterDataPegawai.ViewHolder>() {
         holder.tvCARD_PEGAWAI_ALAMAT.text = item.alamatPegawai
         holder.tvCARD_PEGAWAI_NOHP.text = item.noHPPegawai
         holder.tvCARD_PEGAWAI_cabang.text = item.idCabang
-        holder.cvCARD_PEGAWAI.setOnClickListener {
-        }
 
         holder.cvCARD_PEGAWAI.setOnClickListener {
             val intent = Intent(appContext, TambahPegawaiActivity::class.java)
