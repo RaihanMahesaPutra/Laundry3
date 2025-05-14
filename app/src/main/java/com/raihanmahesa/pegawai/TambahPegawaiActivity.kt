@@ -24,14 +24,31 @@ class TambahPegawaiActivity : AppCompatActivity() {
     lateinit var etCabang: EditText
     lateinit var btSimpan: Button
 
-    var idPegawai: String? = ""
+    var pegawaiId: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_tambah_pegawai)
         init()
-        getDate()
+        val dataIntent = intent
+        if (dataIntent != null) {
+            pegawaiId = dataIntent.getStringExtra("idPegawai")
+            val nama = dataIntent.getStringExtra("namaPegawai")
+            val alamat = dataIntent.getStringExtra("alamatPegawai")
+            val noHp = dataIntent.getStringExtra("noHpPegawai")
+            val cabang = dataIntent.getStringExtra("idCabang")
+
+
+            if (pegawaiId != null) {
+                tvJudul.text = "Edit Data Pegawai"
+                btSimpan.text = "Update"
+                etNama.setText(nama)
+                etAlamat.setText(alamat)
+                etNoHP.setText(noHp)
+                etCabang.setText(cabang)
+            }
+        }
         btSimpan.setOnClickListener{
             cekValidasi()
         }
@@ -40,44 +57,6 @@ class TambahPegawaiActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-
-    fun getDate() {
-        idPegawai = intent.getStringExtra("idPegawai").toString()
-        val judul = intent.getStringExtra("judul")
-        val namaPegawai = intent.getStringExtra("namaPegawai")
-        val alamatPegawai = intent.getStringExtra("alamatPegawai")
-        val noHPPegawai = intent.getStringExtra("noHPPegawai")
-        val idCabang = intent.getStringExtra("idCabang")
-        tvJudul.text = judul
-        etNama.setText(namaPegawai)
-        etAlamat.setText(alamatPegawai)
-        etNoHP.setText(noHPPegawai)
-        etCabang.setText(idCabang)
-        if(!tvJudul.text.equals(this.getString(R.string.tambah_pegawai))){
-            if(judul.equals(this.getString(R.string.edit_pegawai))){
-                mati()
-                btSimpan.text="Sunting"
-            }
-        }else{
-            hidup()
-            etNama.requestFocus()
-            btSimpan.text="Simpan"
-        }
-    }
-
-    fun mati(){
-        etNama.isEnabled = false
-        etAlamat.isEnabled = false
-        etNoHP.isEnabled = false
-        etCabang.isEnabled = false
-    }
-
-    fun hidup() {
-        etNama.isEnabled = true
-        etAlamat.isEnabled = true
-        etNoHP.isEnabled = true
-        etCabang.isEnabled = true
     }
 
     fun init(){
@@ -114,38 +93,17 @@ class TambahPegawaiActivity : AppCompatActivity() {
             return
         }
         if (cabang.isEmpty()) {
-            etCabang.error = this.getString(R.string.validasi_cabang_pegawai)
-            Toast.makeText(this, this.getString(R.string.validasi_cabang_pegawai),Toast.LENGTH_SHORT).show()
+            etCabang.error = this.getString(R.string.validasi_cabang_pelanggan)
+            Toast.makeText(this, this.getString(R.string.validasi_cabang_pelanggan),Toast.LENGTH_SHORT).show()
             etCabang.requestFocus()
             return
         }
-        if (btSimpan.text.equals(this.getString(R.string.button_simpan))) {
+        if (pegawaiId == null) {
             simpan()
-        } else if (btSimpan.text.equals(this.getString(R.string.Sunting))) {
-            hidup()
-            etNama.requestFocus()
-            btSimpan.text = "Perbarui"
-        } else if (btSimpan.text.equals(this.getString(R.string.perbarui))) {
+        } else {
             update()
         }
     }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun update() {
-        val pegawaiRef = database.getReference("pegawai").child(idPegawai.toString())
-        // Buat Map untuk update data
-        val updateData = mutableMapOf<String, Any>()
-        updateData["namaPegawai"] = etNama.text.toString()
-        updateData["alamatPegawai"] = etAlamat.text.toString()
-        updateData["noHPPegawai"] = etNoHP.text.toString()
-        updateData["idCabang"] = etCabang.text.toString()
-        pegawaiRef.updateChildren(updateData).addOnSuccessListener {
-                Toast.makeText(this, this.getString(R.string.edit_pegawai_sukses), Toast.LENGTH_SHORT).show()
-                finish()
-            }.addOnFailureListener {
-                Toast.makeText(this, this.getString(R.string.edit_pegawai_gagal), Toast.LENGTH_SHORT).show()
-            }
-        }
 
     fun simpan() {
         val pegawaiBaru = myRef.push()
@@ -174,4 +132,24 @@ class TambahPegawaiActivity : AppCompatActivity() {
                 )
             }
     }
+
+    fun update() {
+        val dataUpdate = mapOf(
+            "namaPelanggan" to etNama.text.toString(),
+            "alamatPelanggan" to etAlamat.text.toString(),
+            "noHPPelanggan" to etNoHP.text.toString(),
+            "idCabang" to etCabang.text.toString()
+        )
+
+        myRef.child(pegawaiId ?: "").updateChildren(dataUpdate)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Berhasil update data pelanggan", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Gagal update data pelanggan", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
 }

@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detail Pelanggan"
+            android:text="Detail Pegawai"
             android:textStyle="bold"
             android:textSize="18sp"
             android:paddingBottom="8dp" />
@@ -32,10 +32,10 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="ID Pelanggan"/>
+                android:text="@string/ID_Pegawai" />
 
             <TextView
-                android:id="@+id/tvDIALOG_PELANGGAN_ID"
+                android:id="@+id/tvDIALOG_PEGAWAI_ID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="P001284"
@@ -56,7 +56,7 @@
                 android:text="Nama Pelanggan"/>
 
             <TextView
-                android:id="@+id/tvDIALOG_PELANGGAN_NAMA"
+                android:id="@+id/tvDIALOG_PEGAWAI_NAMA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Budi Santoso"
@@ -77,7 +77,7 @@
                 android:text="Alamat"/>
 
             <TextView
-                android:id="@+id/tvDIALOG_PELANGGAN_ALAMAT"
+                android:id="@+id/tvDIALOG_PEGAWAI_ALAMAT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jl. Mawar No. 45, Jakarta"
@@ -97,7 +97,7 @@
                 android:text="No HP"/>
 
             <TextView
-                android:id="@+id/tvDIALOG_PELANGGAN_NOHP"
+                android:id="@+id/tvDIALOG_PEGAWAI_NOHP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0812-3456-7890"
@@ -117,10 +117,10 @@
                 android:text="@string/namaCabang"/>
 
             <TextView
-                android:id="@+id/tvDIALOG_PELANGGAN_CABANG"
+                android:id="@+id/tvDIALOG_PEGAWAICABANG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sumber"
+                android:text="01 Januari 2025"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -134,7 +134,7 @@
             android:weightSum="2">
 
             <Button
-                android:id="@+id/btDIALOG_MOD_PELANGGAN_Edit"
+                android:id="@+id/btDIALOG_MOD_PEGAWAI_Edit"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                 android:layout_marginEnd="8dp" />
 
             <Button
-                android:id="@+id/btDIALOG_MOD_PELANGGAN_Hapus"
+                android:id="@+id/btDIALOG_MOD_PEGAWAI_Hapus"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

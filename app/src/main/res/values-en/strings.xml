@@ -77,4 +77,5 @@
     <string name="validasi_cabang_tambahan">Additional Branch Validation</string>
     <string name="tambah_tambahan_sukses">Add Additional Success</string>
     <string name="tambah_tambahan_gagal">Add Additional Failed</string>
+    <string name="ID_Pegawai">Employee ID</string>
 </resources>

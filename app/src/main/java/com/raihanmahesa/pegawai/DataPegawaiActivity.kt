@@ -14,6 +14,7 @@ import com.google.firebase.database.*
 import com.raihanmahesa.adapter.AdapterDataPegawai
 import com.raihanmahesa.laundry.R
 import com.raihanmahesa.modeldata.model_pegawai
+import com.raihanmahesa.pelanggan.TambahPelangganActivity
 
 class DataPegawaiActivity : AppCompatActivity() {
     val database = FirebaseDatabase.getInstance()
@@ -35,10 +36,13 @@ class DataPegawaiActivity : AppCompatActivity() {
         layoutManager.stackFromEnd = true
         rvDATA_PEGAWAI.layoutManager = layoutManager
         rvDATA_PEGAWAI.setHasFixedSize(true)
-
         pegawaiList = arrayListOf<model_pegawai>()
         getDate()
-
+        val tambahpegawai = findViewById<FloatingActionButton>(R.id.fabDATA_PENGGUNA_TambahPegawai)
+        tambahpegawai.setOnClickListener {
+            val intent = Intent(this, TambahPegawaiActivity::class.java)
+            startActivity(intent)
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

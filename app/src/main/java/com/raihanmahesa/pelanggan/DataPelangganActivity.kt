@@ -27,18 +27,19 @@ class DataPelangganActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_data_pelanggan)
-
         init()
-
         val layoutManager = LinearLayoutManager(this)
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
         rvDATA_PELANGGAN.layoutManager = layoutManager
         rvDATA_PELANGGAN.setHasFixedSize(true)
-
         pelangganList = arrayListOf<model_pelanggan>()
         getDate()
-
+        val tambahpelanggan = findViewById<FloatingActionButton>(R.id.fabDATA_PENGGUNA_Tambah)
+        tambahpelanggan.setOnClickListener {
+            val intent = Intent(this, TambahPelangganActivity::class.java)
+            startActivity(intent)
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

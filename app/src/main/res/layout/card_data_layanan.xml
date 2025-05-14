@@ -131,34 +131,6 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginBottom="8dp"/>
             </LinearLayout>
-
-            <!-- Tombol Aksi -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/btn_hubungi"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/card_hubungi"
-                    android:backgroundTint="#22D10B"
-                    android:textColor="@android:color/white"
-                    android:layout_marginEnd="8dp"/>
-
-                <Button
-                    android:id="@+id/btn_lihat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/card_lihat"
-                    android:backgroundTint="#E77A1B"
-                    android:textColor="@android:color/white"/>
-
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,7 @@
 package com.raihanmahesa.pelanggan
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.update
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -24,11 +25,31 @@ class TambahPelangganActivity : AppCompatActivity() {
     lateinit var etCabang: EditText
     lateinit var btSimpan: Button
 
+    var pelangganId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_tambah_pelanggan)
         init()
+        val dataIntent = intent
+        if (dataIntent != null) {
+            pelangganId = dataIntent.getStringExtra("idPelanggan")
+            val nama = dataIntent.getStringExtra("namaPelanggan")
+            val alamat = dataIntent.getStringExtra("alamatPelanggan")
+            val noHp = dataIntent.getStringExtra("noHpPelanggan")
+            val cabang = dataIntent.getStringExtra("idCabang")
+
+
+            if (pelangganId != null) {
+                tvJudul.text = "Edit Data Pelanggan"
+                btSimpan.text = "Update"
+                etNama.setText(nama)
+                etAlamat.setText(alamat)
+                etNoHP.setText(noHp)
+                etCabang.setText(cabang)
+            }
+        }
         btSimpan.setOnClickListener{
             cekValidasi()
         }
@@ -79,7 +100,11 @@ class TambahPelangganActivity : AppCompatActivity() {
             etCabang.requestFocus()
             return
         }
-        simpan()
+        if (pelangganId == null) {
+            simpan()
+        } else {
+            update()
+        }
     }
 
     fun simpan() {
@@ -107,6 +132,23 @@ class TambahPelangganActivity : AppCompatActivity() {
                 this.getString(R.string.tambah_pelanggan_gagal),
                     Toast.LENGTH_SHORT
                 )
+            }
+    }
+    fun update() {
+        val dataUpdate = mapOf(
+            "namaPelanggan" to etNama.text.toString(),
+            "alamatPelanggan" to etAlamat.text.toString(),
+            "noHPPelanggan" to etNoHP.text.toString(),
+            "idCabang" to etCabang.text.toString()
+        )
+
+        myRef.child(pelangganId ?: "").updateChildren(dataUpdate)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Berhasil update data pelanggan", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Gagal update data pelanggan", Toast.LENGTH_SHORT).show()
             }
     }
 }

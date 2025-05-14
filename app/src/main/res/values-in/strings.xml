@@ -77,4 +77,5 @@
     <string name="validasi_cabang_tambahan">Validasi Cabang Tambahan</string>
     <string name="tambah_tambahan_sukses">Tambah Tambahan Sukses</string>
     <string name="tambah_tambahan_gagal">Tambah Tambahan Gagal</string>
+    <string name="ID_Pegawai">ID Pegawai</string>
 </resources>

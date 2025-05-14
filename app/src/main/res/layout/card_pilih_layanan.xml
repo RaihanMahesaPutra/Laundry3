@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="12dp"
+    android:id="@+id/cvCARD_PILIHLAYANAN"
+    card_view:cardElevation="4dp"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <TextView
+            android:id="@+id/tvCARD_PILIHLAYANAN_ID"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="#BF004C"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:textColor="#FFFFFF"
+            android:text="1"
+            android:textStyle="bold" />
+
+        <!-- Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvCARD_PILIHLAYANAN_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cuci Basah 8kg"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvCARD_PILIHLAYANAN_nohp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Harga : Rp. 25.000" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
