@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="com.raihanmahesa.transaksi.KonfirmasiDataTransaksi">
+
+    <!-- Judul -->
+    <TextView
+        android:id="@+id/tvJudulKonfimasi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Konfirmasi Data"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Nama Pelanggan -->
+    <TextView
+        android:id="@+id/tvNamaPelangganKonfirmasi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nama Pelanggan"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvJudulKonfimasi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Nomor HP -->
+    <TextView
+        android:id="@+id/tvNoHPKonfimasi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nomor HP"
+        app:layout_constraintTop_toBottomOf="@id/tvNamaPelangganKonfirmasi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Label Layanan Utama -->
+    <TextView
+        android:id="@+id/labelLayananUtamaKonfimasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Layanan Utama"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNoHPKonfimasi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Nama Layanan -->
+    <TextView
+        android:id="@+id/tvNamaLayananKonfimasi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nama Layanan"
+        app:layout_constraintTop_toBottomOf="@id/labelLayananUtamaKonfimasi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Harga -->
+    <TextView
+        android:id="@+id/tvHargaLayananKonfimasi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Harga"
+        app:layout_constraintTop_toBottomOf="@id/tvNamaLayananKonfimasi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Label Layanan Tambahan -->
+    <TextView
+        android:id="@+id/labelLayananTambahanKonfimasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Layanan Tambahan"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvHargaLayananKonfimasi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- List Tambahan -->
+    <ListView
+        android:id="@+id/listLayananTambahanKonfimasi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        app:layout_constraintTop_toBottomOf="@id/labelLayananTambahanKonfimasi"
+        app:layout_constraintBottom_toTopOf="@id/layoutTotalBayarKonfimasi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Layout Total Bayar -->
+    <LinearLayout
+        android:id="@+id/layoutTotalBayarKonfimasi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|space_between"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/layoutButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvTotalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Bayar"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvTotalHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp0"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <!-- Tombol Batal dan Pembayaran -->
+    <LinearLayout
+        android:id="@+id/layoutButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnBatal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="BATAL"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#FFBB33"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnPembayaran"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="PEMBAYARAN"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#00C853"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

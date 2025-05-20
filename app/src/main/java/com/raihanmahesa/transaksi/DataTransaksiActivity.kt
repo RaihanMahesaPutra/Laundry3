@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -17,42 +14,38 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.raihanmahesa.adapter.AdapterPilihPelanggan
+import com.raihanmahesa.adapter.AdapterPilihTambahan
 import com.raihanmahesa.laundry.R
-import com.raihanmahesa.modeldata.model_pelanggan
-import com.raihanmahesa.modeldata.model_transaksi_tambahan
+import com.raihanmahesa.modeldata.model_tambahan
+import java.io.Serializable
 
 class DataTransaksiActivity : AppCompatActivity() {
-    private lateinit var tvNAMA_PELANGGAN: TextView
-    private lateinit var tvNO_HP: TextView
-    private lateinit var tvNAMA_LAYANAN: TextView
-    private lateinit var tvHARGA_LAYANAN: TextView
-    private lateinit var rvLAYANAN_TAMBAHAN: RecyclerView
-    private lateinit var btPILIH_PELANGGAN: Button
-    private lateinit var btPILIH_LAYANAN: Button
-    private lateinit var btPROSES: Button
-    private lateinit var btTAMBAHAN: Button
-    private val dataList = mutableListOf<model_transaksi_tambahan>()
+    private lateinit var tvNamaPelanggan: TextView
+    private lateinit var tvNoHp: TextView
+    private lateinit var tvNamaLayanan: TextView
+    private lateinit var tvHargaLayanan: TextView
+    private lateinit var rvLayananTambahan: RecyclerView
+    private lateinit var btnPilihPelanggan: Button
+    private lateinit var btnPilihLayanan: Button
+    private lateinit var btnProses: Button
+    private lateinit var btnTambahan: Button
+
+    private val dataList = mutableListOf<model_tambahan>()
 
     private val pilihPelanggan = 1
     private val pilihLayanan = 2
     private val pilihLayananTambahan = 3
 
-    private var idPelanggan: String = ""
-    private var idCabang: String = ""
-    private var namaPelanggan: String = ""
-    private var noHP: String = ""
-    private var idLayanan: String = ""
-    private var namaLayanan: String = ""
-    private var hargaLayanan: String = ""
-    private var idPegawai: String = ""
+    private var idPelanggan = ""
+    private var idCabang = ""
+    private var namaPelanggan = ""
+    private var noHP = ""
+    private var idLayanan = ""
+    private var namaLayanan = ""
+    private var hargaLayanan = ""
+    private var idPegawai = ""
 
     private lateinit var sharedPref: SharedPreferences
-
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,33 +53,47 @@ class DataTransaksiActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_data_transaksi)
 
-        sharedPref = getSharedPreferences("user_data", MODE_PRIVATE)
-        idCabang = sharedPref.getString("idCabang", null).toString()
-        idPegawai = sharedPref.getString("idPegawai", null).toString()
-
-        setContentView(R.layout.activity_data_transaksi)
         FirebaseApp.initializeApp(this)
-        init()
 
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.reverseLayout = true
-        rvLAYANAN_TAMBAHAN.layoutManager = layoutManager
-        rvLAYANAN_TAMBAHAN.setHasFixedSize(true)
+        sharedPref = getSharedPreferences("user_data", MODE_PRIVATE)
+        idCabang = sharedPref.getString("idCabang", "") ?: ""
+        idPegawai = sharedPref.getString("idPegawai", "") ?: ""
 
-        btPILIH_PELANGGAN.setOnClickListener {
+        initViews()
+
+        rvLayananTambahan.layoutManager = LinearLayoutManager(this).apply {
+            reverseLayout = true
+        }
+        rvLayananTambahan.setHasFixedSize(true)
+
+        btnPilihPelanggan.setOnClickListener {
             val intent = Intent(this, PilihPelangganActivity::class.java)
             startActivityForResult(intent, pilihPelanggan)
         }
 
-        btPILIH_LAYANAN.setOnClickListener {
+        btnPilihLayanan.setOnClickListener {
             val intent = Intent(this, PilihLayananActivity::class.java)
             startActivityForResult(intent, pilihLayanan)
         }
 
-        btTAMBAHAN.setOnClickListener {
-            val intent = Intent(this, pilihLayananTambahan::class.java)
+        btnTambahan.setOnClickListener {
+            val intent = Intent(this, PilihLayananTambahanActivity::class.java)
             startActivityForResult(intent, pilihLayananTambahan)
         }
+
+        btnProses.setOnClickListener {
+            if (validateData()) {
+                // Kirim data ke KonfirmasiDataTransaksi
+                val intent = Intent(this@DataTransaksiActivity, KonfirmasiDataTransaksi::class.java)
+                intent.putExtra("nama_pelanggan", namaPelanggan)
+                intent.putExtra("nomor_hp", noHP)
+                intent.putExtra("nama_layanan", namaLayanan)
+                intent.putExtra("harga_layanan", hargaLayanan)
+                intent.putExtra("layanan_tambahan", ArrayList(listTambahan) as Serializable)
+                startActivity(intent)
+            }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -94,37 +101,69 @@ class DataTransaksiActivity : AppCompatActivity() {
         }
     }
 
-    fun init() {
-        tvNAMA_PELANGGAN = findViewById(R.id.tvNamaPelanggan)
-        tvNO_HP = findViewById(R.id.tvPelangganNoHP)
-        tvNAMA_LAYANAN = findViewById(R.id.tvNamaLayanan)
-        tvHARGA_LAYANAN = findViewById(R.id.tvLayananHarga)
-        rvLAYANAN_TAMBAHAN = findViewById(R.id.rvLayananTambahan)
-        btPILIH_PELANGGAN = findViewById(R.id.btnPilihPelanggan)
-        btPILIH_LAYANAN = findViewById(R.id.btnPilihLayanan)
-        btTAMBAHAN = findViewById(R.id.btnTambahan)
+    private fun initViews() {
+        tvNamaPelanggan = findViewById(R.id.tvNamaPelanggan)
+        tvNoHp = findViewById(R.id.tvPelangganNoHP)
+        tvNamaLayanan = findViewById(R.id.tvNamaLayanan)
+        tvHargaLayanan = findViewById(R.id.tvLayananHarga)
+        rvLayananTambahan = findViewById(R.id.rvLayananTambahan)
+        btnPilihPelanggan = findViewById(R.id.btnPilihPelanggan)
+        btnPilihLayanan = findViewById(R.id.btnPilihLayanan)
+        btnTambahan = findViewById(R.id.btnTambahan)
+        // btnProses masih belum digunakan
     }
-
 
     @Deprecated("This method has been deprecated in favor of using the Activity Result API")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == pilihPelanggan) {
-            if (resultCode == RESULT_OK && data != null) {
-                idPelanggan = data.getStringExtra("idPelanggan").toString()
-                val nama = data.getStringExtra("nama")
-                val nomorHP = data.getStringExtra("noHP")
 
-                tvNAMA_PELANGGAN.text = "Nama Pelanggan : $nama"
-                tvNO_HP.text = "No HP : $nomorHP"
+        if (resultCode == RESULT_OK && data != null) {
+            when (requestCode) {
+                pilihPelanggan -> {
+                    idPelanggan = data.getStringExtra("idPelanggan").orEmpty()
+                    namaPelanggan = data.getStringExtra("nama").orEmpty()
+                    noHP = data.getStringExtra("noHP").orEmpty()
 
-                namaPelanggan = nama.toString()
-                noHP = nomorHP.toString()
+                    tvNamaPelanggan.text = "Nama Pelanggan : $namaPelanggan"
+                    tvNoHp.text = "No HP : $noHP"
+                }
+
+                pilihLayanan -> {
+                    idLayanan = data.getStringExtra("idLayanan").orEmpty()
+                    namaLayanan = data.getStringExtra("nama").orEmpty()
+                    hargaLayanan = data.getStringExtra("harga").orEmpty()
+
+                    tvNamaLayanan.text = "Nama Layanan : $namaLayanan"
+                    tvHargaLayanan.text = "Harga : $hargaLayanan"
+                }
+
+                pilihLayananTambahan -> {
+                    val idTambahan = data.getStringExtra("idTambahan").orEmpty()
+                    val namaTambahan = data.getStringExtra("namaTambahan").orEmpty()
+                    val hargaTambahan = data.getStringExtra("hargaTambahan").orEmpty()
+
+                    val tambahan = model_tambahan(
+                        idTambahan = idTambahan,
+                        namaTambahan = namaTambahan,
+                        hargaTambahan = hargaTambahan
+                    )
+                    dataList.add(tambahan)
+
+                    if (rvLayananTambahan.adapter == null) {
+                        rvLayananTambahan.adapter = AdapterPilihTambahan(dataList)
+                    } else {
+                        rvLayananTambahan.adapter?.notifyDataSetChanged()
+                    }
+                }
             }
-            if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Batal Memilih Pelanggan", Toast.LENGTH_SHORT).show()
-
+        } else if (resultCode == RESULT_CANCELED) {
+            val msg = when (requestCode) {
+                pilihPelanggan -> "Batal Memilih Pelanggan"
+                pilihLayanan -> "Batal Memilih Layanan"
+                pilihLayananTambahan -> "Batal Memilih Layanan Tambahan"
+                else -> "Aksi Dibatalkan"
             }
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
     }
 }

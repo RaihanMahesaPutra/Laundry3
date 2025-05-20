@@ -13,27 +13,25 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.raihanmahesa.adapter.AdapterPilihLayanan
-import com.raihanmahesa.adapter.AdapterPilihPelanggan
 import com.raihanmahesa.laundry.R
 import com.raihanmahesa.modeldata.model_layanan
-import com.raihanmahesa.modeldata.model_pelanggan
 
-class PilihLayananctivity : AppCompatActivity() {
+class PilihLayananActivity : AppCompatActivity() {
+
     private val TAG = "PilihLayanan"
-    val database = FirebaseDatabase.getInstance()
-    val myRef = database.getReference("layanan")
+    private val database = FirebaseDatabase.getInstance()
+    private val myRef = database.getReference("layanan")
+
     private lateinit var rvPilihLayanan: RecyclerView
     private lateinit var searchView: SearchView
-    private var idCabang: String = ""
     private lateinit var tvKosong: TextView
-    lateinit var listLayanan: ArrayList<model_layanan>
-    private lateinit var adapter: AdapterPilihLayanan
+
+    private var idCabang: String = ""
+    private lateinit var listLayanan: ArrayList<model_layanan>
     private lateinit var filteredList: ArrayList<model_layanan>
+    private lateinit var adapter: AdapterPilihLayanan
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,9 +65,7 @@ class PilihLayananctivity : AppCompatActivity() {
 
     private fun setupSearchView() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(query: String?): Boolean = false
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 filterList(newText)
@@ -85,10 +81,10 @@ class PilihLayananctivity : AppCompatActivity() {
         if (query.isNullOrEmpty()) {
             filteredList.addAll(listLayanan)
         } else {
-            val searchText = query.toLowerCase().trim()
+            val searchText = query.lowercase().trim()
             for (layanan in listLayanan) {
-                if (layanan.namaLayanan?.toLowerCase()?.contains(searchText) == true ||
-                    layanan.harga?.toLowerCase()?.contains(searchText) == true ) {
+                if (layanan.namaLayanan?.lowercase()?.contains(searchText) == true ||
+                    layanan.harga?.lowercase()?.contains(searchText) == true) {
                     filteredList.add(layanan)
                 }
             }
@@ -107,15 +103,13 @@ class PilihLayananctivity : AppCompatActivity() {
             tvKosong.visibility = View.GONE
         }
 
-        // Create a new adapter with the filtered list
         adapter = AdapterPilihLayanan(filteredList)
         rvPilihLayanan.adapter = adapter
     }
 
-    fun getData() {
+    private fun getData() {
         Log.d(TAG, "getData() called")
 
-        // Jika idCabang kosong, tampilkan semua pelanggan
         val query = if (idCabang.isEmpty()) {
             myRef.limitToLast(100)
         } else {
@@ -127,39 +121,27 @@ class PilihLayananctivity : AppCompatActivity() {
                 Log.d(TAG, "onDataChange: data exists: ${snapshot.exists()}, count: ${snapshot.childrenCount}")
 
                 if (snapshot.exists()) {
-                    tvKosong.visibility = View.GONE
                     listLayanan.clear()
-
                     for (snap in snapshot.children) {
                         try {
                             val layanan = snap.getValue(model_layanan::class.java)
-                            if (layanan != null) {
-                                listLayanan.add(layanan)
-                                Log.d(TAG, "Added layanan: ${layanan.namaLayanan}")
-                            } else {
-                                Log.e(TAG, "layanan is null for key: ${snap.key}")
+                            layanan?.let {
+                                listLayanan.add(it)
+                                Log.d(TAG, "Added layanan: ${it.namaLayanan}")
                             }
                         } catch (e: Exception) {
                             Log.e(TAG, "Error parsing layanan: ${e.message}")
                         }
                     }
 
-                    Log.d(TAG, "Total layanan loaded: ${listLayanan.size}")
-
-                    // Initialize the filtered list with all data
                     filteredList.clear()
                     filteredList.addAll(listLayanan)
 
-                    // Set adapter
-                    if (listLayanan.isNotEmpty()) {
-                        adapter = AdapterPilihLayanan(filteredList)
-                        rvPilihLayanan.adapter = adapter
-                    } else {
-                        tvKosong.visibility = View.VISIBLE
-                    }
+                    updateRecyclerView()
                 } else {
                     Log.d(TAG, "No data found")
                     tvKosong.visibility = View.VISIBLE
+                    tvKosong.text = "Data layanan tidak ditemukan"
                 }
             }
 
@@ -167,7 +149,7 @@ class PilihLayananctivity : AppCompatActivity() {
                 Log.e(TAG, "Database error: ${error.message}")
                 tvKosong.visibility = View.VISIBLE
                 tvKosong.text = "Error: ${error.message}"
-                Toast.makeText(this@PilihLayananctivity, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PilihLayananActivity, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }

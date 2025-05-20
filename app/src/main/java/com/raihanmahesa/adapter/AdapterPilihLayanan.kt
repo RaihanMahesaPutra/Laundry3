@@ -29,7 +29,7 @@ class AdapterPilihLayanan(private val listLayanan: ArrayList<model_layanan>) :
     ): ViewHolder {
         Log.d(TAG, "onCreateViewHolder called")
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_pilih_pelanggan, parent, false)
+            .inflate(R.layout.card_pilih_layanan, parent, false)
         appContext = parent.context
         return ViewHolder(view)
     }
@@ -73,7 +73,7 @@ class AdapterPilihLayanan(private val listLayanan: ArrayList<model_layanan>) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvID: TextView = itemView.findViewById(R.id.tvCARD_PILIHLAYANAN_ID)
         val tvNama: TextView = itemView.findViewById(R.id.tvCARD_PILIHLAYANAN_nama)
-        val tvHarga: TextView = itemView.findViewById(R.id.tvCARD_PILIHLAYANAN_nohp)
+        val tvHarga: TextView = itemView.findViewById(R.id.tvCARD_PILIHLAYANAN_harga)
         val cvCARD: CardView = itemView.findViewById(R.id.cvCARD_PILIHLAYANAN)
     }
 }

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
         <activity
+            android:name="com.raihanmahesa.transaksi.KonfirmasiDataTransaksi"
+            android:exported="false" />
+        <activity
             android:name="com.raihanmahesa.transaksi.PilihLayananTambahanActivity"
             android:exported="false" />
         <activity
