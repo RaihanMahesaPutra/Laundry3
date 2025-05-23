@@ -83,13 +83,12 @@ class DataTransaksiActivity : AppCompatActivity() {
 
         btnProses.setOnClickListener {
             if (validateData()) {
-                // Kirim data ke KonfirmasiDataTransaksi
                 val intent = Intent(this@DataTransaksiActivity, KonfirmasiDataTransaksi::class.java)
                 intent.putExtra("nama_pelanggan", namaPelanggan)
                 intent.putExtra("nomor_hp", noHP)
                 intent.putExtra("nama_layanan", namaLayanan)
                 intent.putExtra("harga_layanan", hargaLayanan)
-                intent.putExtra("layanan_tambahan", ArrayList(listTambahan) as Serializable)
+                intent.putExtra("layanan_tambahan", ArrayList(dataList)) // pastikan model_tambahan implement Serializable
                 startActivity(intent)
             }
         }
@@ -101,6 +100,24 @@ class DataTransaksiActivity : AppCompatActivity() {
         }
     }
 
+    private fun validateData(): Boolean {
+        if (namaPelanggan.isEmpty()) {
+            Toast.makeText(this, "Pilih pelanggan terlebih dahulu", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (namaLayanan.isEmpty()) {
+            Toast.makeText(this, "Pilih layanan utama terlebih dahulu", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (hargaLayanan.isEmpty() || hargaLayanan == "0") {
+            Toast.makeText(this, "Harga layanan utama tidak valid", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
     private fun initViews() {
         tvNamaPelanggan = findViewById(R.id.tvNamaPelanggan)
         tvNoHp = findViewById(R.id.tvPelangganNoHP)
@@ -110,7 +127,7 @@ class DataTransaksiActivity : AppCompatActivity() {
         btnPilihPelanggan = findViewById(R.id.btnPilihPelanggan)
         btnPilihLayanan = findViewById(R.id.btnPilihLayanan)
         btnTambahan = findViewById(R.id.btnTambahan)
-        // btnProses masih belum digunakan
+        btnProses = findViewById(R.id.btnProses) // Added missing findViewById for btnProses
     }
 
     @Deprecated("This method has been deprecated in favor of using the Activity Result API")
@@ -149,10 +166,11 @@ class DataTransaksiActivity : AppCompatActivity() {
                     )
                     dataList.add(tambahan)
 
+                    // Update the RecyclerView adapter correctly
                     if (rvLayananTambahan.adapter == null) {
                         rvLayananTambahan.adapter = AdapterPilihTambahan(dataList)
                     } else {
-                        rvLayananTambahan.adapter?.notifyDataSetChanged()
+                        (rvLayananTambahan.adapter as AdapterPilihTambahan).notifyDataSetChanged()
                     }
                 }
             }

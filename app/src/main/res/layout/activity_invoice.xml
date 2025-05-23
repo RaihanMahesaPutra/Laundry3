@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    tools:context="com.raihanmahesa.transaksi.InvoiceActivity">
+
+    <!-- Header Section -->
+    <TextView
+        android:id="@+id/tv_business_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mahsok Laundry"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_branch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gilingan"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_business_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_branch" />
+
+    <!-- Transaction Details -->
+    <TextView
+        android:id="@+id/tv_transaction_id_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID Transaksi"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/divider1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_transaction_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="-OQBF4tpqCrkBn9I0zv"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toTopOf="@id/tv_transaction_id_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_transaction_id_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@id/tv_transaction_id_label"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tv_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tanggal"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_transaction_id_label"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="2025-05-14 07:47:17"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toTopOf="@id/tv_date_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_date_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@id/tv_date_label"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tv_customer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesanan"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_date_label"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_customer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Aris"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toTopOf="@id/tv_customer_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_customer_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@id/tv_customer_label"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/tv_employee_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Karyawan"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_customer_label"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_employee"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Binar"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toTopOf="@id/tv_employee_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_employee_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@id/tv_employee_label"
+        android:layout_marginStart="8dp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_employee_label" />
+
+    <!-- Main Service Item -->
+    <TextView
+        android:id="@+id/tv_main_service"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cuci Setrika 5kg"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/divider2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_main_service_price" />
+
+    <TextView
+        android:id="@+id/tv_main_service_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp40.000,00"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="@id/tv_main_service"
+        app:layout_constraintBottom_toBottomOf="@id/tv_main_service"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_service" />
+
+    <!-- Additional Services Header -->
+    <TextView
+        android:id="@+id/tv_additional_services_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rincian Tambahan"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/divider3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Additional Service 1 -->
+    <TextView
+        android:id="@+id/tv_additional_service_number_1"
+        android:layout_width="24dp"
+        android:layout_height="32dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:background="#E53935"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_additional_services_header"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_additional_service_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Pewangi Aroma Terapi"
+        android:textSize="14sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/tv_additional_service_number_1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_additional_service_number_1"
+        app:layout_constraintStart_toEndOf="@id/tv_additional_service_number_1"
+        app:layout_constraintEnd_toStartOf="@id/tv_additional_service_price_1" />
+
+    <TextView
+        android:id="@+id/tv_additional_service_price_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp9.000,00"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="@id/tv_additional_service_number_1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_additional_service_number_1"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Additional Service 2 -->
+    <TextView
+        android:id="@+id/tv_additional_service_number_2"
+        android:layout_width="24dp"
+        android:layout_height="32dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:background="#E53935"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_additional_service_number_1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_additional_service_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Pemutih Pakaian"
+        android:textSize="14sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/tv_additional_service_number_2"
+        app:layout_constraintBottom_toBottomOf="@id/tv_additional_service_number_2"
+        app:layout_constraintStart_toEndOf="@id/tv_additional_service_number_2"
+        app:layout_constraintEnd_toStartOf="@id/tv_additional_service_price_2" />
+
+    <TextView
+        android:id="@+id/tv_additional_service_price_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp5.000,00"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="@id/tv_additional_service_number_2"
+        app:layout_constraintBottom_toBottomOf="@id/tv_additional_service_number_2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Subtotal Additional Services -->
+    <TextView
+        android:id="@+id/tv_subtotal_additional_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subtotal Tambahan"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_additional_service_number_2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_subtotal_additional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp14.000,00"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="@id/tv_subtotal_additional_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_subtotal_additional_label"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtotal_additional_label" />
+
+    <!-- Total -->
+    <TextView
+        android:id="@+id/tv_total_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Bayar"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/divider4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp54.000,00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="@id/tv_total_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_total_label"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_total_label" />
+
+    <!-- Action Buttons -->
+    <Button
+        android:id="@+id/btn_whatsapp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Kirim WhatsApp"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#4CAF50"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/divider5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_print" />
+
+    <Button
+        android:id="@+id/btn_print"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cetak"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#03A9F4"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/divider5"
+        app:layout_constraintStart_toEndOf="@id/btn_whatsapp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
