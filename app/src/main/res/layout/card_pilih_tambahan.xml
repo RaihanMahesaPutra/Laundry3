@@ -48,5 +48,18 @@
                 android:layout_marginTop="5dp"
                 android:text="Harga : Rp. 6.000" />
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="-52dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Hapus"
+            android:src="@android:drawable/ic_menu_delete"
+            android:visibility="gone" /> <!-- default disembunyikan -->
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

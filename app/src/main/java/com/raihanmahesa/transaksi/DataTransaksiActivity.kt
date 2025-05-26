@@ -168,10 +168,17 @@ class DataTransaksiActivity : AppCompatActivity() {
 
                     // Update the RecyclerView adapter correctly
                     if (rvLayananTambahan.adapter == null) {
-                        rvLayananTambahan.adapter = AdapterPilihTambahan(dataList)
+                        rvLayananTambahan.adapter = AdapterPilihTambahan(
+                            dataList,
+                            enableLongDelete = true
+                        ) { position ->
+                            dataList.removeAt(position)
+                            rvLayananTambahan.adapter?.notifyItemRemoved(position)
+                        }
                     } else {
                         (rvLayananTambahan.adapter as AdapterPilihTambahan).notifyDataSetChanged()
                     }
+
                 }
             }
         } else if (resultCode == RESULT_CANCELED) {

@@ -16,6 +16,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.raihanmahesa.laundry.R
 import com.raihanmahesa.modeldata.model_tambahan
 import kotlinx.coroutines.*
@@ -44,12 +46,7 @@ class InvoiceActivity : AppCompatActivity() {
 
     // Additional Services views
     private lateinit var tvAdditionalServicesHeader: TextView
-    private lateinit var tvAdditionalServiceNumber1: TextView
-    private lateinit var tvAdditionalService1: TextView
-    private lateinit var tvAdditionalServicePrice1: TextView
-    private lateinit var tvAdditionalServiceNumber2: TextView
-    private lateinit var tvAdditionalService2: TextView
-    private lateinit var tvAdditionalServicePrice2: TextView
+    private lateinit var rvAdditionalServices: RecyclerView
     private lateinit var tvSubtotalAdditional: TextView
 
     // Total view
@@ -118,12 +115,7 @@ class InvoiceActivity : AppCompatActivity() {
 
         // Additional Services
         tvAdditionalServicesHeader = findViewById(R.id.tv_additional_services_header)
-        tvAdditionalServiceNumber1 = findViewById(R.id.tv_additional_service_number_1)
-        tvAdditionalService1 = findViewById(R.id.tv_additional_service_1)
-        tvAdditionalServicePrice1 = findViewById(R.id.tv_additional_service_price_1)
-        tvAdditionalServiceNumber2 = findViewById(R.id.tv_additional_service_number_2)
-        tvAdditionalService2 = findViewById(R.id.tv_additional_service_2)
-        tvAdditionalServicePrice2 = findViewById(R.id.tv_additional_service_price_2)
+        rvAdditionalServices = findViewById(R.id.rv_additional_services)
         tvSubtotalAdditional = findViewById(R.id.tv_subtotal_additional)
 
         // Total
@@ -184,72 +176,25 @@ class InvoiceActivity : AppCompatActivity() {
             return
         }
 
+        // Show additional services section
         tvAdditionalServicesHeader.visibility = View.VISIBLE
-        var subtotal = 0
 
-        // Setup first additional service
-        if (tambahanList.size >= 1) {
-            val tambahan1 = tambahanList[0]
-            val harga1 = tambahan1.hargaTambahan?.toIntOrNull() ?: 0
+        // Setup RecyclerView
+        rvAdditionalServices.layoutManager = LinearLayoutManager(this)
+        val adapter = AdditionalServicesAdapter(tambahanList)
+        rvAdditionalServices.adapter = adapter
+        rvAdditionalServices.visibility = View.VISIBLE
 
-            tvAdditionalServiceNumber1.apply {
-                text = "1"
-                visibility = View.VISIBLE
-            }
-            tvAdditionalService1.apply {
-                text = tambahan1.namaTambahan ?: "Unknown"
-                visibility = View.VISIBLE
-            }
-            tvAdditionalServicePrice1.apply {
-                text = formatCurrency(harga1)
-                visibility = View.VISIBLE
-            }
-            subtotal += harga1
-        } else {
-            hideFirstAdditionalService()
+        // Calculate subtotal
+        val subtotal = tambahanList.sumOf {
+            it.hargaTambahan?.toIntOrNull() ?: 0
         }
-
-        // Setup second additional service
-        if (tambahanList.size >= 2) {
-            val tambahan2 = tambahanList[1]
-            val harga2 = tambahan2.hargaTambahan?.toIntOrNull() ?: 0
-
-            tvAdditionalServiceNumber2.apply {
-                text = "2"
-                visibility = View.VISIBLE
-            }
-            tvAdditionalService2.apply {
-                text = tambahan2.namaTambahan ?: "Unknown"
-                visibility = View.VISIBLE
-            }
-            tvAdditionalServicePrice2.apply {
-                text = formatCurrency(harga2)
-                visibility = View.VISIBLE
-            }
-            subtotal += harga2
-        } else {
-            hideSecondAdditionalService()
-        }
-
         tvSubtotalAdditional.text = formatCurrency(subtotal)
     }
 
     private fun hideAdditionalServices() {
         tvAdditionalServicesHeader.visibility = View.GONE
-        hideFirstAdditionalService()
-        hideSecondAdditionalService()
-    }
-
-    private fun hideFirstAdditionalService() {
-        tvAdditionalServiceNumber1.visibility = View.GONE
-        tvAdditionalService1.visibility = View.GONE
-        tvAdditionalServicePrice1.visibility = View.GONE
-    }
-
-    private fun hideSecondAdditionalService() {
-        tvAdditionalServiceNumber2.visibility = View.GONE
-        tvAdditionalService2.visibility = View.GONE
-        tvAdditionalServicePrice2.visibility = View.GONE
+        rvAdditionalServices.visibility = View.GONE
     }
 
     private fun setupClickListeners() {
@@ -535,5 +480,32 @@ class InvoiceActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         coroutineScope.cancel()
+    }
+
+    // ==================== ADAPTER CLASS ====================
+
+    inner class AdditionalServicesAdapter(
+        private val additionalServices: List<model_tambahan>
+    ) : RecyclerView.Adapter<AdditionalServicesAdapter.ViewHolder>() {
+
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val tvNumber: TextView = itemView.findViewById(R.id.tv_number)
+            val tvServiceName: TextView = itemView.findViewById(R.id.tv_service_name)
+            val tvServicePrice: TextView = itemView.findViewById(R.id.tv_service_price)
+        }
+
+        override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): ViewHolder {
+            val view = layoutInflater.inflate(R.layout.item_additional_service, parent, false)
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val service = additionalServices[position]
+            holder.tvNumber.text = (position + 1).toString()
+            holder.tvServiceName.text = service.namaTambahan ?: "Unknown"
+            holder.tvServicePrice.text = formatCurrency(service.hargaTambahan?.toIntOrNull() ?: 0)
+        }
+
+        override fun getItemCount(): Int = additionalServices.size
     }
 }
