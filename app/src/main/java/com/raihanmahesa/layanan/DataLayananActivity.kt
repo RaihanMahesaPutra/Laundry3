@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,7 +19,6 @@ import com.google.firebase.database.ValueEventListener
 import com.raihanmahesa.adapter.AdapterDataLayanan
 import com.raihanmahesa.laundry.R
 import com.raihanmahesa.modeldata.model_layanan
-import com.raihanmahesa.pegawai.TambahPegawaiActivity
 
 class DataLayananActivity : AppCompatActivity() {
     val database = FirebaseDatabase.getInstance()
@@ -41,8 +41,8 @@ class DataLayananActivity : AppCompatActivity() {
         rvDATA_LAYANAN.layoutManager = layoutManager
         rvDATA_LAYANAN.setHasFixedSize(true)
 
-        layananList = arrayListOf<model_layanan>()
-        getDate()
+        layananList = arrayListOf()
+        getData()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -61,7 +61,7 @@ class DataLayananActivity : AppCompatActivity() {
         fabDATA_LAYANAN_TambahLayanan = findViewById(R.id.fabDATA_PENGGUNA_TambahLayanan)
     }
 
-    fun getDate() {
+    fun getData() {
         val query = myRef.orderByChild("idLayanan").limitToLast(100)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -73,9 +73,36 @@ class DataLayananActivity : AppCompatActivity() {
                             layananList.add(layanan)
                         }
                     }
-                    val adapter = AdapterDataLayanan(layananList)
+
+                    val adapter = AdapterDataLayanan(layananList) { selectedLayanan ->
+                        val idToDelete = selectedLayanan.idLayanan
+                        if (idToDelete != null) {
+                            AlertDialog.Builder(this@DataLayananActivity)
+                                .setTitle("Konfirmasi Hapus")
+                                .setMessage("Apakah Anda yakin ingin menghapus layanan \"${selectedLayanan.namaLayanan}\"?")
+                                .setPositiveButton("Hapus") { _, _ ->
+                                    myRef.child(idToDelete).removeValue()
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                this@DataLayananActivity,
+                                                "Data berhasil dihapus",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(
+                                                this@DataLayananActivity,
+                                                "Gagal menghapus data",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                }
+                                .setNegativeButton("Batal", null)
+                                .show()
+                        }
+                    }
+
                     rvDATA_LAYANAN.adapter = adapter
-                    adapter.notifyDataSetChanged()
                 }
             }
 

@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detail Pegawai"
+            android:text="@string/detailpegawai"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#333333"
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Nama Pelanggan"
+                android:text="@string/namapegawai"
                 android:textColor="#666" />
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Alamat"
+                android:text="@string/etcard_alamat"
                 android:textColor="#666" />
 
             <TextView
@@ -107,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="No HP"
+                android:text="@string/etcard_nohp"
                 android:textColor="#666" />
 
             <TextView
@@ -131,7 +131,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cabang"
+                android:text="@string/etcard_cabang"
                 android:textColor="#666" />
 
             <TextView
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="Hapus"
+                android:text="@string/Hapus"
                 android:textColor="#FFF"
                 android:backgroundTint="#D32F2F" />
         </LinearLayout>

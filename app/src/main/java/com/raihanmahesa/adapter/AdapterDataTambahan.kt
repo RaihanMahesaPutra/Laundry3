@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.raihanmahesa.laundry.R
 import com.raihanmahesa.modeldata.model_tambahan
 
-class AdapterDataTambahan (
-    private val listTambahan: ArrayList<model_tambahan>) :
-    RecyclerView.Adapter<AdapterDataTambahan.ViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
+class AdapterDataTambahan(
+    private val listTambahan: ArrayList<model_tambahan>,
+    private val onItemLongClick: (model_tambahan) -> Unit
+) : RecyclerView.Adapter<AdapterDataTambahan.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_data_tambahan, parent, false)
         return ViewHolder(view)
@@ -26,7 +25,10 @@ class AdapterDataTambahan (
         holder.tvCARD_TAMBAHAN_NAMA.text = item.namaTambahan
         holder.tvCARD_TAMBAHAN_HARGA.text = item.hargaTambahan
         holder.tvCARD_TAMBAHAN_CABANG.text = item.cabang
-        holder.cvCARD_TAMBAHAN.setOnClickListener {
+
+        holder.cvCARD_TAMBAHAN.setOnLongClickListener {
+            onItemLongClick(item)
+            true
         }
     }
 

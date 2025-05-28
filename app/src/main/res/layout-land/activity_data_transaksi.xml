@@ -1,170 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:id="@+id/main">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/scrollView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp">
+            android:padding="20dp"
+            android:layout_marginStart="13dp">
 
             <!-- Left Side (Customer Data and Main Service) -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/left_panel"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <!-- Customer Data Section -->
                 <TextView
-                    android:id="@+id/label_customer_data"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvDataPelanggan"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Data Pelanggan"
-                    android:textSize="24sp"
+                    android:text="@string/detailpelanggan"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#333333"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/label_customer_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Pelanggan:"
-                    android:textSize="16sp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/label_customer_data"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_customer_name"
+                    android:id="@+id/tvNamaPelanggan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintTop_toTopOf="@id/label_customer_name"
-                    app:layout_constraintStart_toEndOf="@id/label_customer_name"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_marginTop="12dp"
+                    android:text="@string/card_namapelanggan"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDataPelanggan" />
 
                 <TextView
-                    android:id="@+id/label_phone_number"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvPelangganNoHP"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="No HP:"
-                    android:textSize="16sp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/label_customer_name"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_phone_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintTop_toTopOf="@id/label_phone_number"
-                    app:layout_constraintStart_toEndOf="@id/label_phone_number"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:text="@string/card_nohp"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvNamaPelanggan" />
 
                 <Button
-                    android:id="@+id/btn_select_customer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pilih Pelanggan"
-                    android:textColor="#FFFFFF"
+                    android:id="@+id/btnPilihPelanggan"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
                     android:backgroundTint="#00BFFF"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/label_phone_number"
+                    android:text="@string/pilihpelanggan"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/tvPelangganNoHP" />
 
                 <!-- Main Service Section -->
                 <TextView
-                    android:id="@+id/label_main_service"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvLayananUtama"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Layanan Utama"
-                    android:textSize="24sp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/layananutama"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#333333"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintTop_toBottomOf="@id/btn_select_customer"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/btnPilihPelanggan" />
 
                 <TextView
-                    android:id="@+id/label_service_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Layanan:"
-                    android:textSize="16sp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/label_main_service"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_service_name"
+                    android:id="@+id/tvNamaLayanan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintTop_toTopOf="@id/label_service_name"
-                    app:layout_constraintStart_toEndOf="@id/label_service_name"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_marginTop="12dp"
+                    android:text="@string/namalayanan"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLayananUtama" />
 
                 <TextView
-                    android:id="@+id/label_price"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvLayananHarga"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Harga:"
-                    android:textSize="16sp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/label_service_name"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_price"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintTop_toTopOf="@id/label_price"
-                    app:layout_constraintStart_toEndOf="@id/label_price"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:text="@string/harga"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvNamaLayanan" />
 
                 <Button
-                    android:id="@+id/btn_select_service"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pilih Layanan"
-                    android:textColor="#FFFFFF"
+                    android:id="@+id/btnPilihLayanan"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
                     android:backgroundTint="#00BFFF"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/label_price"
+                    android:text="@string/pilihlayanan"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
+                    app:layout_constraintTop_toBottomOf="@id/tvLayananHarga" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Guideline for dividing the screen -->
@@ -173,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.50073206" />
+                app:layout_constraintGuide_begin="342dp" />
 
             <!-- Right Side (Additional Services and Buttons) -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -188,31 +152,30 @@
 
                 <!-- Additional Services Section -->
                 <TextView
-                    android:id="@+id/label_additional_services"
+                    android:id="@+id/tvLayananTambahan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Layanan Tambahan"
-                    android:textSize="24sp"
+                    android:text="@string/layanantambahan"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#333333"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_additional"
+                    android:id="@+id/rvLayananTambahan"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/label_additional_services"
-                    app:layout_constraintBottom_toTopOf="@id/button_container"
+                    app:layout_constraintTop_toBottomOf="@id/tvLayananTambahan"
+                    app:layout_constraintBottom_toTopOf="@id/buttonLayout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <!-- Button Container -->
                 <LinearLayout
-                    android:id="@+id/button_container"
+                    android:id="@+id/buttonLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -222,21 +185,21 @@
                     app:layout_constraintEnd_toEndOf="parent">
 
                     <Button
-                        android:id="@+id/btn_additional"
+                        android:id="@+id/btnTambahan"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Tambahan"
+                        android:text="@string/tambahan"
                         android:textColor="#ffffff"
                         android:backgroundTint="#FFC107"
                         android:layout_marginEnd="8dp" />
 
                     <Button
-                        android:id="@+id/btn_process"
+                        android:id="@+id/btnProses"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Proses"
+                        android:text="@string/Proses"
                         android:textColor="#FFFFFF"
                         android:backgroundTint="#4CAF50"
                         android:layout_marginStart="8dp" />

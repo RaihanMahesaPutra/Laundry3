@@ -56,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Estimasi Hari Ini"
+                android:text="@string/card_estimasi"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,6 +105,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/transaksi_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -124,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Transaksi"
+                    android:text="@string/text_Transaksi"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -140,6 +141,7 @@
             tools:ignore="MissingConstraints">
 
             <LinearLayout
+                android:id="@+id/pelanggan_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -157,7 +159,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pelanggan"
+                    android:text="@string/text_pelanggan"
                     android:textSize="14sp"
                     android:gravity="center_vertical" />
             </LinearLayout>
@@ -191,7 +193,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Laporan"
+                    android:text="@string/text_laporan"
                     android:textSize="14sp"
                     android:gravity="center_vertical" />
             </LinearLayout>
@@ -238,7 +240,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Akun"
+                    android:text="@string/text_akun"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -254,6 +256,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/layanan_menu"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:orientation="vertical"
@@ -268,7 +271,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Layanan"
+                    android:text="@string/text_layanan"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -286,6 +289,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/tambahan_menu"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:orientation="vertical"
@@ -300,7 +304,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tambahan"
+                    android:text="@string/text_tambahan"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -331,6 +335,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/pegawai_menu"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:gravity="center"
@@ -345,7 +350,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pengawai"
+                    android:text="@string/text_pegawai"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -361,6 +366,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/cabang_menu"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:orientation="vertical"
@@ -375,7 +381,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cabang"
+                    android:text="@string/etcard_cabang"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -407,7 +413,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Printer"
+                    android:text="@string/text_printer"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

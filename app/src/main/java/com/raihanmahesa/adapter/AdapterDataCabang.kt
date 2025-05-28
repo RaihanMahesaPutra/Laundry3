@@ -9,7 +9,8 @@ import com.raihanmahesa.laundry.R
 import com.raihanmahesa.modeldata.model_cabang
 
 class AdapterDataCabang (
-    private val listCabang: ArrayList<model_cabang>) :
+    private val listCabang: ArrayList<model_cabang>,
+    private val onItemLongClick: (model_cabang) -> Unit) :
     RecyclerView.Adapter<AdapterDataCabang.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,6 +28,8 @@ class AdapterDataCabang (
         holder.tvCARD_CABANG_ALAMAT.text = item.alamatCabang
         holder.tvCARD_CABANG_NOHP.text = item.noHPCabang
         holder.cvCARD_CABANG.setOnClickListener {
+            onItemLongClick(item)
+            true
         }
     }
 

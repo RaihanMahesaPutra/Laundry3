@@ -36,7 +36,7 @@
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="21dp"
+        android:layout_marginStart="27dp"
         android:background="@drawable/rounded_edittext"
         android:hint="@string/text_namalengkap"
         app:layout_constraintStart_toEndOf="@+id/tvpegawainama"
@@ -62,7 +62,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="78dp"
         android:background="@drawable/rounded_edittext"
-        android:hint="@string/card_alamat"
+        android:hint="@string/etcard_alamat"
         app:layout_constraintStart_toEndOf="@+id/tvpegawaialamat"
         app:layout_constraintTop_toBottomOf="@+id/etpegawainama"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
@@ -86,7 +86,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="82dp"
         android:background="@drawable/rounded_edittext"
-        android:hint="@string/card_nohp"
+        android:hint="@string/etcard_nohp"
         android:inputType="phone"
         app:layout_constraintTop_toBottomOf="@+id/etpegawaialamat"
         app:layout_constraintStart_toEndOf="@+id/tvpegawainohp"
@@ -111,14 +111,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="74dp"
         android:background="@drawable/rounded_edittext"
-        android:hint="@string/text_cabang"
+        android:hint="@string/etcard_cabang"
         app:layout_constraintStart_toEndOf="@+id/tvpegawaicabang"
         app:layout_constraintTop_toBottomOf="@+id/etpegawainohp"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btpegawaisimpan"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:text="@string/button_simpan"
         android:layout_marginTop="40dp"

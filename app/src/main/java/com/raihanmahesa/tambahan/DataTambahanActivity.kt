@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -72,7 +73,36 @@ class DataTambahanActivity : AppCompatActivity() {
                             tambahanList.add(tambahan)
                         }
                     }
-                    val adapter = AdapterDataTambahan(tambahanList)
+
+                    val adapter = AdapterDataTambahan(tambahanList) { selectedTambahan ->
+                        val idToDelete = selectedTambahan.idTambahan
+                        if (idToDelete != null) {
+                            AlertDialog.Builder(this@DataTambahanActivity)
+                                .setTitle("Konfirmasi Hapus")
+                                .setMessage("Apakah Anda yakin ingin menghapus tambahan \"${selectedTambahan.namaTambahan}\"?")
+                                .setPositiveButton("Hapus") { _, _ ->
+                                    myRef.child(idToDelete).removeValue()
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                this@DataTambahanActivity,
+                                                "Data berhasil dihapus",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(
+                                                this@DataTambahanActivity,
+                                                "Gagal menghapus data",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                }
+                                .setNegativeButton("Batal", null)
+                                .show()
+                        }
+                    }
+
+
                     rvDATA_TAMBAHAN.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
@@ -83,4 +113,5 @@ class DataTambahanActivity : AppCompatActivity() {
             }
         })
     }
+
 }

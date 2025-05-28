@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detail Pelanggan"
+            android:text="@string/detailpelanggan"
             android:textStyle="bold"
             android:textSize="20sp"
             android:paddingBottom="8dp" />
@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="ID Pelanggan"/>
+                android:text="@string/idpelanggan"/>
 
             <TextView
                 android:id="@+id/tvDIALOG_PELANGGAN_ID"
@@ -53,7 +53,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Nama Pelanggan"/>
+                android:text="@string/namapelanggan"/>
 
             <TextView
                 android:id="@+id/tvDIALOG_PELANGGAN_NAMA"
@@ -74,7 +74,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Alamat"/>
+                android:text="@string/etcard_alamat"/>
 
             <TextView
                 android:id="@+id/tvDIALOG_PELANGGAN_ALAMAT"
@@ -94,7 +94,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="No HP"/>
+                android:text="@string/etcard_nohp"/>
 
             <TextView
                 android:id="@+id/tvDIALOG_PELANGGAN_NOHP"
@@ -114,7 +114,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/namaCabang"/>
+                android:text="@string/etcard_cabang"/>
 
             <TextView
                 android:id="@+id/tvDIALOG_PELANGGAN_CABANG"

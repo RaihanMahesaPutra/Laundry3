@@ -73,9 +73,25 @@ class DataCabangActivity : AppCompatActivity() {
                             cabangList.add(cabang)
                         }
                     }
-                    val adapter = AdapterDataCabang(cabangList)
+                    val adapter = AdapterDataCabang(cabangList) { selectedCabang ->
+                        selectedCabang.idCabang?.let { id ->
+                            android.app.AlertDialog.Builder(this@DataCabangActivity)
+                                .setTitle("Hapus Cabang")
+                                .setMessage("Yakin ingin menghapus cabang \"${selectedCabang.namaCabang}\"?")
+                                .setPositiveButton("Hapus") { _, _ ->
+                                    myRef.child(id).removeValue()
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this@DataCabangActivity, "Cabang berhasil dihapus", Toast.LENGTH_SHORT).show()
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(this@DataCabangActivity, "Gagal menghapus cabang", Toast.LENGTH_SHORT).show()
+                                        }
+                                }
+                                .setNegativeButton("Batal", null)
+                                .show()
+                        }
+                    }
                     rvDATA_CABANG.adapter = adapter
-                    adapter.notifyDataSetChanged()
                 }
             }
 
