@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Permissions untuk Android 12+ (API 31+) -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-
-    <!-- Permissions untuk Android versi lama (PENTING!) -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" /> <!-- Permissions untuk Android versi lama (PENTING!) -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <!-- Permission Internet untuk WhatsApp -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Feature declarations -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Permission Internet untuk WhatsApp -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Feature declarations -->
     <uses-feature
         android:name="android.hardware.bluetooth"
         android:required="false" />
@@ -29,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
-
+        <activity
+            android:name="com.raihanmahesa.RegisterActivity"
+            android:exported="false" />
         <activity
             android:name="com.raihanmahesa.transaksi.InvoiceActivity"
             android:exported="false" />
@@ -50,7 +45,13 @@
             android:exported="false" />
         <activity
             android:name="com.raihanmahesa.LoginActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.raihanmahesa.laporan.DataLaporanActivity"
             android:exported="false" />
@@ -86,12 +87,7 @@
             android:exported="false" />
         <activity
             android:name="com.raihanmahesa.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
     </application>
 
 </manifest>

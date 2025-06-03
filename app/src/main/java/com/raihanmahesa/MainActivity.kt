@@ -19,6 +19,7 @@ import com.raihanmahesa.transaksi.DataTransaksiActivity
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -79,16 +80,16 @@ class MainActivity : AppCompatActivity() {
     private fun getGreetingMessage(): String {
         val currentTime = LocalTime.now()
         return when {
-            currentTime.hour in 5..10 -> "Selamat Pagi"
-            currentTime.hour in 11..14 -> "Selamat Siang"
-            currentTime.hour in 15..18 -> "Selamat Sore"
-            else -> "Selamat Malam"
+            currentTime.hour in 5..10 -> getString(R.string.greeting_morning)
+            currentTime.hour in 11..14 -> getString(R.string.greeting_afternoon)
+            currentTime.hour in 15..18 -> getString(R.string.greeting_evening)
+            else -> getString(R.string.greeting_night)
         }
     }
 
     private fun getCurrentDate(): String {
         val currentDate = LocalDate.now()
-        val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.getDefault())
         return currentDate.format(formatter)
     }
 }

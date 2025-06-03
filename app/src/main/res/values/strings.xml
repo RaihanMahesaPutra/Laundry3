@@ -111,4 +111,24 @@
     <string name="KirimWhatsApp">Kirim WhatsApp</string>
     <string name="Cetak">Cetak</string>
     <string name="SubtotalTambahan">Subtotal Tambahan</string>
+    <string name="greeting_morning">Selamat Pagi</string>
+    <string name="greeting_afternoon">Selamat Siang</string>
+    <string name="greeting_evening">Selamat Sore</string>
+    <string name="greeting_night">Selamat Malam</string>
+    <string name="Silakanloginuntukmelanjutkan">Silakan login untuk melanjutkan</string>
+    <string name="SelamatDatang">Selamat Datang</string>
+    <string name="Password">Password</string>
+    <string name="Login">Login</string>
+    <string name="Belummempunyaiakun">Belum mempunyai akun?</string>
+    <string name="Daftardisini">Daftar disini</string>
+    <string name="Username">Username</string>
+    <string name="Register">Register</string>
+    <string name="Sudahmempunyaiakun">Sudah mempunyai akun?</string>
+    <string name="Logindisini">Login Disini</string>
+    <string name="LoginBerhasil">Login Berhasil!</string>
+    <string name="Passwordsalah">Password Salah</string>
+    <string name="Datapenggunatidakvalid">Data Pengguna Tidak Valid</string>
+    <string name="Nomorbelumterdaftar">Nomor Belum Terdaftar</string>
+    <string name="Registerberhasil">Register Berhasil!</string>
+    <string name="Silakanregisteruntukmelanjutkan">Silakan register untuk melanjutkan</string>
 </resources>

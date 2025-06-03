@@ -55,9 +55,20 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp" />
 
+        <EditText
+            android:id="@+id/RegisterUsername"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/Username"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginBottom="16dp"/>
+
         <!-- Input No HP -->
         <EditText
-            android:id="@+id/LoginPhone"
+            android:id="@+id/RegisterPhone"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="@string/etcard_nohp"
@@ -67,7 +78,6 @@
             android:background="@drawable/bg_edittext"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Container Password dengan Tombol Toggle -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -75,7 +85,7 @@
 
             <!-- Input Password -->
             <EditText
-                android:id="@+id/LoginPassword"
+                android:id="@+id/RegisterPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/Password"
@@ -100,35 +110,35 @@
 
         <!-- Tombol Login -->
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="@string/Login"
+            android:text="@string/Register"
             android:backgroundTint="#10C185"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="4dp">
 
             <!-- TextView Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Belummempunyaiakun"
+                android:text="@string/Sudahmempunyaiakun"
                 android:textSize="14sp"
                 android:layout_marginBottom="4dp"/>
 
             <!-- TextView Nilai -->
             <TextView
-                android:id="@+id/tvRegister"
+                android:id="@+id/tvlogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Daftardisini"
+                android:text="@string/Logindisini"
                 android:textSize="14sp"
                 android:textColor="#2196F3"
                 android:layout_marginStart="10dp"
