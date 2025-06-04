@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.raihanmahesa.akun.DataAkunActivity
 import com.raihanmahesa.cabang.DataCabangActivity
 import com.raihanmahesa.laporan.DataLaporanActivity
 import com.raihanmahesa.laundry.R
@@ -80,6 +81,12 @@ class MainActivity : AppCompatActivity() {
         val laporanMenu = findViewById<LinearLayout>(R.id.laporan_menu)
         laporanMenu.setOnClickListener {
             val intent = Intent(this, DataLaporanActivity::class.java)
+            startActivity(intent)
+        }
+
+        val akunMenu = findViewById<LinearLayout>(R.id.akun_menu)
+        akunMenu.setOnClickListener {
+            val intent = Intent(this, DataAkunActivity::class.java)
             startActivity(intent)
         }
     }
