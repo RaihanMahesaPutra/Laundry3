@@ -132,4 +132,12 @@
     <string name="Nomorbelumterdaftar">Nomor Belum Terdaftar</string>
     <string name="Registerberhasil">Register Berhasil!</string>
     <string name="Silakanregisteruntukmelanjutkan">Silakan register untuk melanjutkan</string>
+    <string name="EditDataPelanggan">Edit Data Pelanggan</string>
+    <string name="Update">Update</string>
+    <string name="Gagalmemuatdatalaporan">Gagal memuat data laporan</string>
+    <string name="StatusberhasildiubahmenjadiSudahDibayar">Status berhasil diubah menjadi Sudah Dibayar</string>
+    <string name="Laporanberhasildihapus">Laporan berhasil dihapus</string>
+    <string name="Gagalmenghapuslaporan">Gagal menghapus laporan</string>
+    <string name="DataLaporanTransaksi">"Data Laporan Transaksi "</string>
+    <string name="Gagalmengupdatestatus">Gagal mengupdate status</string>
 </resources>

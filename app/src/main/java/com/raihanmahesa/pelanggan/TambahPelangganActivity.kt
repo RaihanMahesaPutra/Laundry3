@@ -42,8 +42,8 @@ class TambahPelangganActivity : AppCompatActivity() {
 
 
             if (pelangganId != null) {
-                tvJudul.text = "Edit Data Pelanggan"
-                btSimpan.text = "Update"
+                tvJudul.text = this.getString(R.string.EditDataPelanggan)
+                btSimpan.text = this.getString(R.string.Update)
                 etNama.setText(nama)
                 etAlamat.setText(alamat)
                 etNoHP.setText(noHp)

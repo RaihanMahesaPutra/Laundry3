@@ -18,7 +18,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.FirebaseDatabase
+import com.raihanmahesa.laporan.DataLaporanActivity
 import com.raihanmahesa.laundry.R
+import com.raihanmahesa.modeldata.StatusLaporan
+import com.raihanmahesa.modeldata.model_laporan
 import com.raihanmahesa.modeldata.model_tambahan
 import kotlinx.coroutines.*
 import java.io.IOException
@@ -200,6 +204,8 @@ class InvoiceActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         btnWhatsapp.setOnClickListener {
             shareToWhatsApp()
+            // Tambahkan laporan setelah kirim WhatsApp
+            addLaporanToDataLaporan()
         }
 
         btnPrint.setOnClickListener {
@@ -221,6 +227,7 @@ class InvoiceActivity : AppCompatActivity() {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
+            showToast("Pesan WhatsApp berhasil dikirim!")
         } catch (e: Exception) {
             showToast("Gagal membuka WhatsApp")
             e.printStackTrace()
@@ -263,6 +270,42 @@ class InvoiceActivity : AppCompatActivity() {
     private fun getCurrentDateTime(): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         return sdf.format(Date())
+    }
+
+    // ==================== LAPORAN MANAGEMENT ====================
+
+    private fun addLaporanToDataLaporan() {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val formattedDate = sdf.format(Date())
+
+        val status = determinePaymentStatus(metodePembayaran)
+
+        val newLaporan = model_laporan(
+            noTransaksi = noTransaksi,
+            tanggal = formattedDate,
+            namaPelanggan = namaPelanggan,
+            namaLayanan = namaLayanan,
+            totalHarga = totalHarga,
+            status = status
+        )
+
+        // Simpan ke Firebase
+        val database = FirebaseDatabase.getInstance().getReference("Laporan")
+        database.child(noTransaksi).setValue(newLaporan)
+            .addOnSuccessListener {
+                showToast("Data transaksi berhasil disimpan!")
+            }
+            .addOnFailureListener {
+                showToast("Gagal menyimpan data transaksi")
+            }
+    }
+
+    private fun determinePaymentStatus(metodePembayaran: String): StatusLaporan {
+        return when (metodePembayaran.lowercase()) {
+            "cash", "dana", "gopay", "ovo", "shopeepay", "transfer bank" -> StatusLaporan.SUDAH_DIBAYAR
+            "nanti" -> StatusLaporan.BELUM_DIBAYAR
+            else -> StatusLaporan.BELUM_DIBAYAR // Default untuk metode tidak dikenal
+        }
     }
 
     // ==================== BLUETOOTH PRINTING ====================
@@ -339,6 +382,9 @@ class InvoiceActivity : AppCompatActivity() {
 
                 if (result) {
                     showToast("Struk berhasil dicetak!")
+                    // Tambahkan laporan setelah berhasil cetak
+                    addLaporanToDataLaporan()
+                    goToDataLaporan()
                 } else {
                     showToast("Gagal mencetak struk")
                 }
@@ -347,6 +393,14 @@ class InvoiceActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun goToDataLaporan() {
+        // Pindah ke DataLaporanActivity
+        val intent = Intent(this, DataLaporanActivity::class.java)
+        startActivity(intent)
+        // Optional: finish current activity agar tidak bisa kembali ke invoice
+        finish()
     }
 
     private suspend fun printToBluetoothDevice(

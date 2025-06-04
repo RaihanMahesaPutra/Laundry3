@@ -102,7 +102,7 @@
     <string name="pembayaran">Payment</string>
     <string name="PilihMetodePembayaran">Select Payment Method</string>
     <string name="bayarnanti">Pay Later</string>
-    <string name="Tunai">cash</string>
+    <string name="Tunai">Cash</string>
     <string name="MahsokLaundry">Mahsok Laundry</string>
     <string name="idTransaksi">Transaction ID</string>
     <string name="Tanggal">Date</string>
@@ -132,4 +132,12 @@
     <string name="Nomorbelumterdaftar">Number not registered</string>
     <string name="Registerberhasil">Register Successful!</string>
     <string name="Silakanregisteruntukmelanjutkan">Please register to continue</string>
+    <string name="EditDataPelanggan">Edit Customer Data</string>
+    <string name="Update">Update</string>
+    <string name="Gagalmemuatdatalaporan">Failed to load report data</string>
+    <string name="StatusberhasildiubahmenjadiSudahDibayar">Status successfully changed to Paid</string>
+    <string name="Laporanberhasildihapus">Report successfully deleted</string>
+    <string name="Gagalmenghapuslaporan">Failed to delete report</string>
+    <string name="DataLaporanTransaksi">"Data Laporan Transaksi "</string>
+    <string name="Gagalmengupdatestatus">Failed to update status</string>
 </resources>
