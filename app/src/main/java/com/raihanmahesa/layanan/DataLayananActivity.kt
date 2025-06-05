@@ -78,26 +78,26 @@ class DataLayananActivity : AppCompatActivity() {
                         val idToDelete = selectedLayanan.idLayanan
                         if (idToDelete != null) {
                             AlertDialog.Builder(this@DataLayananActivity)
-                                .setTitle("Konfirmasi Hapus")
-                                .setMessage("Apakah Anda yakin ingin menghapus layanan \"${selectedLayanan.namaLayanan}\"?")
-                                .setPositiveButton("Hapus") { _, _ ->
+                                .setTitle(getString(R.string.confirm_delete_title))
+                                .setMessage(getString(R.string.confirm_delete_service_message, selectedLayanan.namaLayanan))
+                                .setPositiveButton(getString(R.string.delete)) { _, _ ->
                                     myRef.child(idToDelete).removeValue()
                                         .addOnSuccessListener {
                                             Toast.makeText(
                                                 this@DataLayananActivity,
-                                                "Data berhasil dihapus",
+                                                getString(R.string.data_deleted_success),
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
                                         .addOnFailureListener {
                                             Toast.makeText(
                                                 this@DataLayananActivity,
-                                                "Gagal menghapus data",
+                                                getString(R.string.data_delete_failed),
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
                                 }
-                                .setNegativeButton("Batal", null)
+                                .setNegativeButton(getString(R.string.cancel), null)
                                 .show()
                         }
                     }
@@ -107,7 +107,7 @@ class DataLayananActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataLayananActivity, "Data Gagal Dimuat", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DataLayananActivity, getString(R.string.data_load_failed), Toast.LENGTH_SHORT).show()
             }
         })
     }

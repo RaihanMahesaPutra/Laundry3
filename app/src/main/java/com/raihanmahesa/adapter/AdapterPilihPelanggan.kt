@@ -41,9 +41,16 @@ class AdapterPilihPelanggan(private val listPelanggan: ArrayList<model_pelanggan
 
         try {
             holder.tvID.text = "[$nomor]"
-            holder.tvNama.text = item.namaPelanggan ?: "Nama tidak tersedia"
-            holder.tvAlamat.text = "Alamat : ${item.alamatPelanggan ?: "Tidak tersedia"}"
-            holder.tvNoHP.text = "No HP : ${item.noHPPelanggan ?: "Tidak tersedia"}"
+            val context = holder.itemView.context
+
+            holder.tvNama.text = item.namaPelanggan ?: context.getString(R.string.nama_tidak_tersedia)
+
+            val alamat = item.alamatPelanggan ?: context.getString(R.string.alamat_tidak_tersedia)
+            holder.tvAlamat.text = context.getString(R.string.label_alamat, alamat)
+
+            val noHP = item.noHPPelanggan ?: context.getString(R.string.nohp_tidak_tersedia)
+            holder.tvNoHP.text = context.getString(R.string.label_nohp, noHP)
+
 
             Log.d(TAG, "Binding data: ${item.namaPelanggan} at position $position")
 
@@ -57,7 +64,7 @@ class AdapterPilihPelanggan(private val listPelanggan: ArrayList<model_pelanggan
                     (appContext as Activity).finish()
                 } catch (e: Exception) {
                     Log.e(TAG, "Error in click listener: ${e.message}")
-                    Toast.makeText(appContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(appContext, context.getString(R.string.terjadi_kesalahan), Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (e: Exception) {

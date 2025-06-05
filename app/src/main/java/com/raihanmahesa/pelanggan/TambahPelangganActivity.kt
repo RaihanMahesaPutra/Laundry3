@@ -144,11 +144,11 @@ class TambahPelangganActivity : AppCompatActivity() {
 
         myRef.child(pelangganId ?: "").updateChildren(dataUpdate)
             .addOnSuccessListener {
-                Toast.makeText(this, "Berhasil update data pelanggan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.customer_update_success), Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Gagal update data pelanggan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.customer_update_failed), Toast.LENGTH_SHORT).show()
             }
     }
 }

@@ -83,7 +83,7 @@ class KonfirmasiDataTransaksi : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
             totalHarga = 0
-            Toast.makeText(this, "Error calculating total price", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_calculating_total_price), Toast.LENGTH_SHORT).show()
         }
 
         tvTotalBayar.text = "Rp$totalHarga"
@@ -115,7 +115,7 @@ class KonfirmasiDataTransaksi : AppCompatActivity() {
             for ((namaMetode, idCard) in metodeList) {
                 val card = dialogView.findViewById<androidx.cardview.widget.CardView>(idCard)
                 card?.setOnClickListener {
-                    Toast.makeText(this, "Metode dipilih: $namaMetode", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.payment_method_selected, namaMetode), Toast.LENGTH_SHORT).show()
 
                     // Pindah ke InvoiceActivity dengan membawa data transaksi
                     val invoiceIntent = Intent(this, InvoiceActivity::class.java)

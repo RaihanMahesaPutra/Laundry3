@@ -41,8 +41,9 @@ class AdapterPilihLayanan(private val listLayanan: ArrayList<model_layanan>) :
 
         try {
             holder.tvID.text = "[$nomor]"
-            holder.tvNama.text = item.namaLayanan ?: "Nama tidak tersedia"
-            holder.tvHarga.text = "No HP : ${item.harga ?: "Tidak tersedia"}"
+            holder.tvNama.text = item.namaLayanan ?: appContext.getString(R.string.nama_tidak_tersedia)
+            val hargaTeks = item.harga ?: appContext.getString(R.string.harga_tidak_tersedia)
+            holder.tvHarga.text = appContext.getString(R.string.label_harga, hargaTeks)
 
             Log.d(TAG, "Binding data: ${item.namaLayanan} at position $position")
 
@@ -56,7 +57,7 @@ class AdapterPilihLayanan(private val listLayanan: ArrayList<model_layanan>) :
                     (appContext as Activity).finish()
                 } catch (e: Exception) {
                     Log.e(TAG, "Error in click listener: ${e.message}")
-                    Toast.makeText(appContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(appContext, appContext.getString(R.string.terjadi_kesalahan), Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (e: Exception) {

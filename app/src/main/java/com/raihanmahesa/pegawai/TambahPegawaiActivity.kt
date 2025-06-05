@@ -41,8 +41,8 @@ class TambahPegawaiActivity : AppCompatActivity() {
 
 
             if (pegawaiId != null) {
-                tvJudul.text = "Edit Data Pegawai"
-                btSimpan.text = "Update"
+                tvJudul.text = getString(R.string.edit_employee_data)
+                btSimpan.text = getString(R.string.update)
                 etNama.setText(nama)
                 etAlamat.setText(alamat)
                 etNoHP.setText(noHp)
@@ -143,11 +143,11 @@ class TambahPegawaiActivity : AppCompatActivity() {
 
         myRef.child(pegawaiId ?: "").updateChildren(dataUpdate)
             .addOnSuccessListener {
-                Toast.makeText(this, "Berhasil update data pelanggan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.employee_update_success), Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Gagal update data pelanggan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.employee_update_failed), Toast.LENGTH_SHORT).show()
             }
     }
 

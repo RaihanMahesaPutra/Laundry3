@@ -76,7 +76,11 @@ class DataPelangganActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataPelangganActivity, "Data Gagal Dimuat", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@DataPelangganActivity,
+                    getString(R.string.data_load_failed),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }

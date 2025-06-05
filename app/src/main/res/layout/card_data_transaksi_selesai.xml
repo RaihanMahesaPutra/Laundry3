@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="Yono"
                 android:textColor="#212121"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -158,6 +158,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
             <TextView
+                android:id="@+id/tvTanggalPengambilan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2025-04-16 13:34:34"

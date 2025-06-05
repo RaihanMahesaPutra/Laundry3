@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -50,6 +51,17 @@ class DataAkunActivity : AppCompatActivity() {
     private var databaseQuery: DatabaseReference? = null
     private var isActivityDestroyed = false
 
+    // Activity result launcher untuk menangani hasil dari EditProfileActivity
+    private val editProfileLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            // Profile berhasil diupdate, reload data
+            loadProfileData()
+            Toast.makeText(this, getString(R.string.profile_refreshed), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -68,6 +80,14 @@ class DataAkunActivity : AppCompatActivity() {
         if (checkLoginStatus()) {
             loadProfileData()
             setupClickListeners()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh data ketika kembali ke activity ini
+        if (checkLoginStatus()) {
+            loadProfileData()
         }
     }
 
@@ -100,7 +120,7 @@ class DataAkunActivity : AppCompatActivity() {
             ivBack = findViewById(R.id.ivBack)
         } catch (e: Exception) {
             Log.e(TAG, "Error initializing views: ${e.message}")
-            Toast.makeText(this, "Error loading interface", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_loading_interface), Toast.LENGTH_SHORT).show()
             finish()
         }
     }
@@ -110,7 +130,7 @@ class DataAkunActivity : AppCompatActivity() {
             database = FirebaseDatabase.getInstance().reference
         } catch (e: Exception) {
             Log.e(TAG, "Error initializing Firebase: ${e.message}")
-            Toast.makeText(this, "Error connecting to database", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_connecting_database), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -123,8 +143,8 @@ class DataAkunActivity : AppCompatActivity() {
             val sessionExpired = (currentTime - loginTime) > SESSION_DURATION_MS
 
             if (!isLoggedIn || sessionExpired) {
-                val message = if (sessionExpired) "Sesi telah berakhir" else "Anda belum login"
-                Toast.makeText(this, "$message, silakan login kembali", Toast.LENGTH_SHORT).show()
+                val message = if (sessionExpired) getString(R.string.session_expired) else getString(R.string.not_logged_in)
+                Toast.makeText(this, "$message, ${getString(R.string.please_login_again)}", Toast.LENGTH_SHORT).show()
                 redirectToLogin()
                 false
             } else {
@@ -170,22 +190,22 @@ class DataAkunActivity : AppCompatActivity() {
             Log.d(TAG, "Loading profile - Phone: $phoneNumber, Name: $userName")
 
             if (phoneNumber.isNullOrEmpty()) {
-                Toast.makeText(this, "Data user tidak ditemukan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.user_data_not_found), Toast.LENGTH_SHORT).show()
                 redirectToLogin()
                 return
             }
 
             // Set loading state with null checks
-            if (::tvNamaLengkap.isInitialized) tvNamaLengkap.text = "Loading..."
+            if (::tvNamaLengkap.isInitialized) tvNamaLengkap.text = getString(R.string.loading)
             if (::tvNomorTelepon.isInitialized) tvNomorTelepon.text = phoneNumber
-            if (::tvPassword.isInitialized) tvPassword.text = "Loading..."
+            if (::tvPassword.isInitialized) tvPassword.text = getString(R.string.loading)
 
             // Load from Firebase
             loadFromFirebase(phoneNumber, userName)
 
         } catch (e: Exception) {
             Log.e(TAG, "Error loading profile data: ${e.message}")
-            Toast.makeText(this, "Error loading profile", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_loading_profile), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -202,7 +222,7 @@ class DataAkunActivity : AppCompatActivity() {
                         try {
                             currentUser = snapshot.getValue(model_user::class.java)
                             currentUser?.let { user ->
-                                val nama = user.username?.takeIf { it.isNotEmpty() } ?: "Nama tidak tersedia"
+                                val nama = user.username?.takeIf { it.isNotEmpty() } ?: getString(R.string.name_not_available)
                                 val password = user.password ?: ""
 
                                 // Update SharedPreferences dengan data terbaru
@@ -243,12 +263,12 @@ class DataAkunActivity : AppCompatActivity() {
         if (isActivityDestroyed) return
 
         try {
-            val displayName = cachedUserName?.takeIf { it.isNotEmpty() } ?: "Data tidak tersedia"
+            val displayName = cachedUserName?.takeIf { it.isNotEmpty() } ?: getString(R.string.data_not_available)
             displayUserData(phoneNumber, displayName, "***")
 
             if (cachedUserName.isNullOrEmpty()) {
                 runOnUiThread {
-                    Toast.makeText(this, "Gagal memuat data dari server", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DataAkunActivity, getString(R.string.failed_load_server_data), Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (e: Exception) {
@@ -301,8 +321,7 @@ class DataAkunActivity : AppCompatActivity() {
             }
 
             btnEditProfile.setOnClickListener {
-                Toast.makeText(this, "Edit Profile clicked", Toast.LENGTH_SHORT).show()
-                // TODO: Implementasi EditProfileActivity
+                openEditProfile()
             }
 
             btnSignOut.setOnClickListener {
@@ -313,18 +332,28 @@ class DataAkunActivity : AppCompatActivity() {
         }
     }
 
+    private fun openEditProfile() {
+        try {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            editProfileLauncher.launch(intent)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error opening edit profile: ${e.message}")
+            Toast.makeText(this, getString(R.string.error_opening_edit_profile), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun showSignOutDialog() {
         try {
             if (isActivityDestroyed || isFinishing) return
 
             AlertDialog.Builder(this)
-                .setTitle("Sign Out")
-                .setMessage("Apakah Anda yakin ingin keluar dari akun?")
-                .setPositiveButton("Ya") { dialog, _ ->
+                .setTitle(getString(R.string.sign_out_title))
+                .setMessage(getString(R.string.sign_out_message))
+                .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                     dialog.dismiss()
                     signOut()
                 }
-                .setNegativeButton("Batal") { dialog, _ ->
+                .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                     dialog.dismiss()
                 }
                 .setCancelable(true)
@@ -342,7 +371,7 @@ class DataAkunActivity : AppCompatActivity() {
             cleanupFirebaseListener()
 
             runOnUiThread {
-                Toast.makeText(this, "Berhasil sign out", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DataAkunActivity, getString(R.string.sign_out_success), Toast.LENGTH_SHORT).show()
             }
 
             val intent = Intent(this, LoginActivity::class.java)

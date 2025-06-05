@@ -101,7 +101,7 @@ class PilihPelangganActivity : AppCompatActivity() {
 
         if (filteredList.isEmpty()) {
             tvKosong.visibility = View.VISIBLE
-            tvKosong.text = "Tidak ada pelanggan yang cocok"
+            tvKosong.text = getString(R.string.no_matching_customers)
         } else {
             tvKosong.visibility = View.GONE
         }
@@ -134,16 +134,16 @@ class PilihPelangganActivity : AppCompatActivity() {
                             val pelanggan = snap.getValue(model_pelanggan::class.java)
                             if (pelanggan != null) {
                                 listPelanggan.add(pelanggan)
-                                Log.d(TAG, "Added pelanggan: ${pelanggan.namaPelanggan}")
+                                Log.d(TAG, getString(R.string.log_added_customer, pelanggan.namaPelanggan))
                             } else {
-                                Log.e(TAG, "pelanggan is null for key: ${snap.key}")
+                                Log.e(TAG, getString(R.string.log_customer_null, snap.key ?: "unknown"))
                             }
                         } catch (e: Exception) {
-                            Log.e(TAG, "Error parsing pelanggan: ${e.message}")
+                            Log.e(TAG, getString(R.string.log_error_parsing_customer, e.message ?: getString(R.string.log_unknown_error)))
                         }
                     }
 
-                    Log.d(TAG, "Total pelanggan loaded: ${listPelanggan.size}")
+                    Log.d(TAG, getString(R.string.log_total_customers_loaded, listPelanggan.size))
 
                     // Initialize the filtered list with all data
                     filteredList.clear()
@@ -155,10 +155,12 @@ class PilihPelangganActivity : AppCompatActivity() {
                         rvPilihPelanggan.adapter = adapter
                     } else {
                         tvKosong.visibility = View.VISIBLE
+                        tvKosong.text = getString(R.string.no_customers_available)
                     }
                 } else {
-                    Log.d(TAG, "No data found")
+                    Log.d(TAG, getString(R.string.log_no_data_found))
                     tvKosong.visibility = View.VISIBLE
+                    tvKosong.text = getString(R.string.customer_data_not_found)
                 }
             }
 

@@ -55,17 +55,51 @@ class DataTransaksiActivity : AppCompatActivity() {
 
         FirebaseApp.initializeApp(this)
 
+        // Set activity title
+        title = getString(R.string.data_transaksi_title)
+
         sharedPref = getSharedPreferences("user_data", MODE_PRIVATE)
         idCabang = sharedPref.getString("idCabang", "") ?: ""
         idPegawai = sharedPref.getString("idPegawai", "") ?: ""
 
         initViews()
+        setupRecyclerView()
+        setupClickListeners()
+        setupWindowInsets()
+    }
 
+    private fun initViews() {
+        tvNamaPelanggan = findViewById(R.id.tvNamaPelanggan)
+        tvNoHp = findViewById(R.id.tvPelangganNoHP)
+        tvNamaLayanan = findViewById(R.id.tvNamaLayanan)
+        tvHargaLayanan = findViewById(R.id.tvLayananHarga)
+        rvLayananTambahan = findViewById(R.id.rvLayananTambahan)
+        btnPilihPelanggan = findViewById(R.id.btnPilihPelanggan)
+        btnPilihLayanan = findViewById(R.id.btnPilihLayanan)
+        btnTambahan = findViewById(R.id.btnTambahan)
+        btnProses = findViewById(R.id.btnProses)
+
+        // Set button text from string resources
+        btnPilihPelanggan.text = getString(R.string.pilih_pelanggan)
+        btnPilihLayanan.text = getString(R.string.pilih_layanan)
+        btnTambahan.text = getString(R.string.tambah_layanan)
+        btnProses.text = getString(R.string.proses)
+
+        // Set initial text for TextViews
+        tvNamaPelanggan.text = getString(R.string.nama_pelanggan, getString(R.string.belum_dipilih))
+        tvNoHp.text = getString(R.string.no_hp, getString(R.string.kosong))
+        tvNamaLayanan.text = getString(R.string.nama_layanan, getString(R.string.belum_dipilih))
+        tvHargaLayanan.text = getString(R.string.harga_layanan, getString(R.string.kosong))
+    }
+
+    private fun setupRecyclerView() {
         rvLayananTambahan.layoutManager = LinearLayoutManager(this).apply {
             reverseLayout = true
         }
         rvLayananTambahan.setHasFixedSize(true)
+    }
 
+    private fun setupClickListeners() {
         btnPilihPelanggan.setOnClickListener {
             val intent = Intent(this, PilihPelangganActivity::class.java)
             startActivityForResult(intent, pilihPelanggan)
@@ -88,11 +122,13 @@ class DataTransaksiActivity : AppCompatActivity() {
                 intent.putExtra("nomor_hp", noHP)
                 intent.putExtra("nama_layanan", namaLayanan)
                 intent.putExtra("harga_layanan", hargaLayanan)
-                intent.putExtra("layanan_tambahan", ArrayList(dataList)) // pastikan model_tambahan implement Serializable
+                intent.putExtra("layanan_tambahan", ArrayList(dataList))
                 startActivity(intent)
             }
         }
+    }
 
+    private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -102,32 +138,20 @@ class DataTransaksiActivity : AppCompatActivity() {
 
     private fun validateData(): Boolean {
         if (namaPelanggan.isEmpty()) {
-            Toast.makeText(this, "Pilih pelanggan terlebih dahulu", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.pilih_pelanggan_dulu), Toast.LENGTH_SHORT).show()
             return false
         }
 
         if (namaLayanan.isEmpty()) {
-            Toast.makeText(this, "Pilih layanan utama terlebih dahulu", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.pilih_layanan_utama_dulu), Toast.LENGTH_SHORT).show()
             return false
         }
 
         if (hargaLayanan.isEmpty() || hargaLayanan == "0") {
-            Toast.makeText(this, "Harga layanan utama tidak valid", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.harga_layanan_tidak_valid), Toast.LENGTH_SHORT).show()
             return false
         }
         return true
-    }
-
-    private fun initViews() {
-        tvNamaPelanggan = findViewById(R.id.tvNamaPelanggan)
-        tvNoHp = findViewById(R.id.tvPelangganNoHP)
-        tvNamaLayanan = findViewById(R.id.tvNamaLayanan)
-        tvHargaLayanan = findViewById(R.id.tvLayananHarga)
-        rvLayananTambahan = findViewById(R.id.rvLayananTambahan)
-        btnPilihPelanggan = findViewById(R.id.btnPilihPelanggan)
-        btnPilihLayanan = findViewById(R.id.btnPilihLayanan)
-        btnTambahan = findViewById(R.id.btnTambahan)
-        btnProses = findViewById(R.id.btnProses) // Added missing findViewById for btnProses
     }
 
     @Deprecated("This method has been deprecated in favor of using the Activity Result API")
@@ -141,8 +165,8 @@ class DataTransaksiActivity : AppCompatActivity() {
                     namaPelanggan = data.getStringExtra("nama").orEmpty()
                     noHP = data.getStringExtra("noHP").orEmpty()
 
-                    tvNamaPelanggan.text = "Nama Pelanggan : $namaPelanggan"
-                    tvNoHp.text = "No HP : $noHP"
+                    tvNamaPelanggan.text = getString(R.string.nama_pelanggan, namaPelanggan)
+                    tvNoHp.text = getString(R.string.no_hp, noHP)
                 }
 
                 pilihLayanan -> {
@@ -150,8 +174,8 @@ class DataTransaksiActivity : AppCompatActivity() {
                     namaLayanan = data.getStringExtra("nama").orEmpty()
                     hargaLayanan = data.getStringExtra("harga").orEmpty()
 
-                    tvNamaLayanan.text = "Nama Layanan : $namaLayanan"
-                    tvHargaLayanan.text = "Harga : $hargaLayanan"
+                    tvNamaLayanan.text = getString(R.string.nama_layanan, namaLayanan)
+                    tvHargaLayanan.text = getString(R.string.harga_layanan, hargaLayanan)
                 }
 
                 pilihLayananTambahan -> {
@@ -178,15 +202,14 @@ class DataTransaksiActivity : AppCompatActivity() {
                     } else {
                         (rvLayananTambahan.adapter as AdapterPilihTambahan).notifyDataSetChanged()
                     }
-
                 }
             }
         } else if (resultCode == RESULT_CANCELED) {
             val msg = when (requestCode) {
-                pilihPelanggan -> "Batal Memilih Pelanggan"
-                pilihLayanan -> "Batal Memilih Layanan"
-                pilihLayananTambahan -> "Batal Memilih Layanan Tambahan"
-                else -> "Aksi Dibatalkan"
+                pilihPelanggan -> getString(R.string.batal_memilih_pelanggan)
+                pilihLayanan -> getString(R.string.batal_memilih_layanan)
+                pilihLayananTambahan -> getString(R.string.batal_memilih_layanan_tambahan)
+                else -> getString(R.string.aksi_dibatalkan)
             }
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }

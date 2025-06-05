@@ -78,26 +78,26 @@ class DataTambahanActivity : AppCompatActivity() {
                         val idToDelete = selectedTambahan.idTambahan
                         if (idToDelete != null) {
                             AlertDialog.Builder(this@DataTambahanActivity)
-                                .setTitle("Konfirmasi Hapus")
-                                .setMessage("Apakah Anda yakin ingin menghapus tambahan \"${selectedTambahan.namaTambahan}\"?")
-                                .setPositiveButton("Hapus") { _, _ ->
+                                .setTitle(getString(R.string.confirm_delete_title))
+                                .setMessage(getString(R.string.confirm_delete_message, selectedTambahan.namaTambahan))
+                                .setPositiveButton(getString(R.string.delete)) { _, _ ->
                                     myRef.child(idToDelete).removeValue()
                                         .addOnSuccessListener {
                                             Toast.makeText(
                                                 this@DataTambahanActivity,
-                                                "Data berhasil dihapus",
+                                                getString(R.string.data_deleted_success),
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
                                         .addOnFailureListener {
                                             Toast.makeText(
                                                 this@DataTambahanActivity,
-                                                "Gagal menghapus data",
+                                                getString(R.string.data_delete_failed),
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
                                 }
-                                .setNegativeButton("Batal", null)
+                                .setNegativeButton(getString(R.string.cancel), null)
                                 .show()
                         }
                     }
@@ -109,7 +109,11 @@ class DataTambahanActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataTambahanActivity, "Data Gagal Dimuat", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@DataTambahanActivity,
+                    getString(R.string.data_load_failed),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }

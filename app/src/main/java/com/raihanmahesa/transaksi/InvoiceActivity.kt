@@ -227,9 +227,9 @@ class InvoiceActivity : AppCompatActivity() {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
-            showToast("Pesan WhatsApp berhasil dikirim!")
+            showToast(getString(R.string.whatsapp_message_sent_en))
         } catch (e: Exception) {
-            showToast("Gagal membuka WhatsApp")
+            showToast(getString(R.string.failed_to_open_whatsapp_en))
             e.printStackTrace()
         }
     }
@@ -280,23 +280,47 @@ class InvoiceActivity : AppCompatActivity() {
 
         val status = determinePaymentStatus(metodePembayaran)
 
+        // Konversi layanan tambahan ke format yang bisa disimpan
+        val layananTambahanMap = mutableMapOf<String, Any>()
+
+        // Set default values untuk layanan tambahan
+        layananTambahanMap["parfum"] = "Tidak"
+        layananTambahanMap["setrika"] = "Tidak"
+        layananTambahanMap["antar"] = "Tidak"
+
+        // Update berdasarkan layanan tambahan yang dipilih
+        tambahanList.forEach { tambahan ->
+            when (tambahan.namaTambahan?.lowercase()) {
+                "parfum" -> layananTambahanMap["parfum"] = "Ya"
+                "setrika" -> layananTambahanMap["setrika"] = "Ya"
+                "antar jemput", "antar" -> layananTambahanMap["antar"] = "Ya"
+                // Tambahkan layanan tambahan lainnya sesuai kebutuhan
+            }
+        }
+
         val newLaporan = model_laporan(
             noTransaksi = noTransaksi,
             tanggal = formattedDate,
             namaPelanggan = namaPelanggan,
             namaLayanan = namaLayanan,
             totalHarga = totalHarga,
-            status = status
+            status = status,
+            // Tambahkan field layanan tambahan
+            parfum = layananTambahanMap["parfum"] as? String,
+            setrika = layananTambahanMap["setrika"] as? String,
+            antar = layananTambahanMap["antar"] as? String,
+            // tanggalPengambilan akan diset ketika status berubah ke SELESAI
+            tanggalPengambilan = null
         )
 
         // Simpan ke Firebase
         val database = FirebaseDatabase.getInstance().getReference("Laporan")
         database.child(noTransaksi).setValue(newLaporan)
             .addOnSuccessListener {
-                showToast("Data transaksi berhasil disimpan!")
+                showToast(this.getString(R.string.firebase_success_message))
             }
             .addOnFailureListener {
-                showToast("Gagal menyimpan data transaksi")
+                showToast(this.getString(R.string.firebase_failure_message))
             }
     }
 
@@ -360,17 +384,17 @@ class InvoiceActivity : AppCompatActivity() {
         val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
         if (bluetoothAdapter == null) {
-            showToast("Bluetooth tidak didukung pada perangkat ini")
+            showToast(getString(R.string.bluetooth_not_supported))
             return
         }
 
         if (!bluetoothAdapter.isEnabled) {
-            showToast("Bluetooth tidak aktif. Silakan aktifkan Bluetooth")
+            showToast(getString(R.string.bluetooth_not_enabled))
             return
         }
 
         if (!checkBluetoothPermissions()) {
-            showToast("Permission Bluetooth tidak tersedia")
+            showToast(getString(R.string.bluetooth_permission_not_available))
             return
         }
 
@@ -381,12 +405,12 @@ class InvoiceActivity : AppCompatActivity() {
                 }
 
                 if (result) {
-                    showToast("Struk berhasil dicetak!")
+                    showToast(getString(R.string.print_success))
                     // Tambahkan laporan setelah berhasil cetak
                     addLaporanToDataLaporan()
                     goToDataLaporan()
                 } else {
-                    showToast("Gagal mencetak struk")
+                    showToast(getString(R.string.print_failed))
                 }
             } catch (e: Exception) {
                 showToast("Error: ${e.message}")
@@ -525,7 +549,7 @@ class InvoiceActivity : AppCompatActivity() {
                     grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                     printReceipt()
                 } else {
-                    showToast("Permission Bluetooth diperlukan untuk mencetak")
+                    showToast(this.getString(R.string.bluetooth_permission_needed))
                 }
             }
         }

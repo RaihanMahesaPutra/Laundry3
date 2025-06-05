@@ -32,8 +32,12 @@ class AdapterPilihTambahan(
         val item = listTambahan[position]
 
         holder.tvID.text = "[$nomor]"
-        holder.tvNama.text = item.namaTambahan ?: "Tidak ada nama"
-        holder.tvHarga.text = "Harga: Rp ${item.hargaTambahan ?: "0"}"
+        val context = holder.itemView.context
+
+        holder.tvNama.text = item.namaTambahan ?: context.getString(R.string.nama_tidak_tersedia)
+
+        val harga = item.hargaTambahan ?: context.getString(R.string.harga_tidak_tersedia)
+        holder.tvHarga.text = context.getString(R.string.label_harga, harga)
 
         // Tampilkan atau sembunyikan tombol delete
         holder.btnDelete.visibility = if (visibleDeleteSet.contains(position)) View.VISIBLE else View.GONE

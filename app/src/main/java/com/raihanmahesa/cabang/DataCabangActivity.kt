@@ -76,18 +76,26 @@ class DataCabangActivity : AppCompatActivity() {
                     val adapter = AdapterDataCabang(cabangList) { selectedCabang ->
                         selectedCabang.idCabang?.let { id ->
                             android.app.AlertDialog.Builder(this@DataCabangActivity)
-                                .setTitle("Hapus Cabang")
-                                .setMessage("Yakin ingin menghapus cabang \"${selectedCabang.namaCabang}\"?")
-                                .setPositiveButton("Hapus") { _, _ ->
+                                .setTitle(getString(R.string.delete_branch_title))
+                                .setMessage(getString(R.string.confirm_delete_branch_message, selectedCabang.namaCabang))
+                                .setPositiveButton(getString(R.string.delete)) { _, _ ->
                                     myRef.child(id).removeValue()
                                         .addOnSuccessListener {
-                                            Toast.makeText(this@DataCabangActivity, "Cabang berhasil dihapus", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(
+                                                this@DataCabangActivity,
+                                                getString(R.string.branch_deleted_success),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                         .addOnFailureListener {
-                                            Toast.makeText(this@DataCabangActivity, "Gagal menghapus cabang", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(
+                                                this@DataCabangActivity,
+                                                getString(R.string.branch_delete_failed),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                 }
-                                .setNegativeButton("Batal", null)
+                                .setNegativeButton(getString(R.string.cancel), null)
                                 .show()
                         }
                     }
@@ -96,7 +104,7 @@ class DataCabangActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataCabangActivity, "Data Gagal Dimuat", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DataCabangActivity, getString(R.string.data_load_failed), Toast.LENGTH_SHORT).show()
             }
         })
     }

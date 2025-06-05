@@ -101,7 +101,7 @@ class PilihLayananTambahanActivity : AppCompatActivity() {
 
         if (filteredList.isEmpty()) {
             tvKosong.visibility = View.VISIBLE
-            tvKosong.text = "Tidak ada tambahan yang cocok"
+            tvKosong.text = getString(R.string.no_matching_additions)
         } else {
             tvKosong.visibility = View.GONE
         }
@@ -130,10 +130,10 @@ class PilihLayananTambahanActivity : AppCompatActivity() {
                             val tambahan = snap.getValue(model_tambahan::class.java)
                             tambahan?.let {
                                 listLayananTambahan.add(it)
-                                Log.d(TAG, "Added layanan tambahan: ${it.namaTambahan}")
+                                Log.d(TAG, getString(R.string.log_added_additional_service, it.namaTambahan))
                             }
                         } catch (e: Exception) {
-                            Log.e(TAG, "Error parsing layanan tambahan: ${e.message}")
+                            Log.e(TAG, getString(R.string.log_error_parsing_additional_service, e.message ?: "Unknown error"))
                         }
                     }
 
@@ -142,9 +142,9 @@ class PilihLayananTambahanActivity : AppCompatActivity() {
 
                     updateRecyclerView()
                 } else {
-                    Log.d(TAG, "No data found")
+                    Log.d(TAG, getString(R.string.log_no_data_found))
                     tvKosong.visibility = View.VISIBLE
-                    tvKosong.text = "Data layanan tambahan tidak ditemukan"
+                    tvKosong.text = getString(R.string.additional_service_not_found)
                 }
             }
 

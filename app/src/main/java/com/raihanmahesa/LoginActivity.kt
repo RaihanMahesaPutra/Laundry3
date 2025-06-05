@@ -173,7 +173,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // Method untuk logout (panggil dari MainActivity atau activity lain jika diperlukan)
     fun logout() {
         clearLoginSession()
         val intent = Intent(this, LoginActivity::class.java)

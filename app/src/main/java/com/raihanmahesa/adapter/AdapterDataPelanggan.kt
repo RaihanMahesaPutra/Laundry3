@@ -75,9 +75,9 @@ class AdapterDataPelanggan(
 
             btHapus?.setOnClickListener {
                 AlertDialog.Builder(holder.itemView.context)
-                    .setTitle("Konfirmasi Hapus")
-                    .setMessage("Yakin ingin menghapus data ini?")
-                    .setPositiveButton("Ya") { _, _ ->
+                    .setTitle(holder.itemView.context.getString(R.string.delete_confirmation))
+                    .setMessage(holder.itemView.context.getString(R.string.delete_message))
+                    .setPositiveButton(holder.itemView.context.getString(R.string.yes)) { _, _ ->
                         val dbRef = FirebaseDatabase.getInstance()
                             .getReference("Pelanggan")
                             .child(item.idPelanggan ?: "")
@@ -86,13 +86,13 @@ class AdapterDataPelanggan(
                             listPelanggan.removeAt(position)
                             notifyItemRemoved(position)
                             notifyItemRangeChanged(position, listPelanggan.size)
-                            Toast.makeText(holder.itemView.context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(holder.itemView.context, holder.itemView.context.getString(R.string.delete_success), Toast.LENGTH_SHORT).show()
                             alertDialog.dismiss()
                         }.addOnFailureListener {
-                            Toast.makeText(holder.itemView.context, "Gagal: ${it.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(holder.itemView.context, "${holder.itemView.context.getString(R.string.delete_failed)}: ${it.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    .setNegativeButton("Tidak") { dialog, _ ->
+                    .setNegativeButton(holder.itemView.context.getString(R.string.no)) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .show()
