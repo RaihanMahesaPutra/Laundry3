@@ -117,12 +117,12 @@ class AdapterDataLaporan(
         return total
     }
 
-    // Helper function untuk menampilkan text total layanan tambahan
+    // Helper function untuk menampilkan text total layanan tambahan - DIMODIFIKASI
     private fun getAdditionalServicesText(laporan: model_laporan): String {
         val total = getTotalAdditionalServices(laporan)
 
         return when (total) {
-            0 -> "Tidak ada layanan tambahan"
+            0 -> "0 Layanan Tambahan"
             1 -> "1 Layanan Tambahan"
             else -> "$total Layanan Tambahan"
         }
@@ -134,11 +134,7 @@ class AdapterDataLaporan(
         private val tvDateTime: TextView = itemView.findViewById(R.id.tvDateTime)
         private val tvLayanan: TextView = itemView.findViewById(R.id.tvLayanan)
         private val tvTotalAmount: TextView = itemView.findViewById(R.id.tvTotalAmount)
-        private val tvAdditionalServices: TextView? = try {
-            itemView.findViewById(R.id.tvAdditionalServices)
-        } catch (e: Exception) {
-            null
-        }
+
         private val btnSelesai: Button? = try {
             itemView.findViewById(R.id.btnPickup)
         } catch (e: Exception) {
@@ -150,9 +146,6 @@ class AdapterDataLaporan(
             tvDateTime.text = laporan.tanggal ?: ""
             tvLayanan.text = laporan.namaLayanan ?: "Unknown Service"
             tvTotalAmount.text = formatCurrency(laporan.totalHarga ?: 0)
-
-            // Set additional services text - tampilkan total saja
-            tvAdditionalServices?.text = getAdditionalServicesText(laporan)
 
             // Setup long click untuk delete
             setupLongClickDelete(itemView, position)
@@ -170,11 +163,7 @@ class AdapterDataLaporan(
         private val tvDateTime: TextView = itemView.findViewById(R.id.tvDateTime)
         private val tvLayanan: TextView = itemView.findViewById(R.id.tvLayanan)
         private val tvTotalAmount: TextView = itemView.findViewById(R.id.tvTotalAmount)
-        private val tvAdditionalServices: TextView? = try {
-            itemView.findViewById(R.id.tvAdditionalServices)
-        } catch (e: Exception) {
-            null
-        }
+
         private val btnBayar: Button? = try {
             itemView.findViewById(R.id.btnPickup)
         } catch (e: Exception) {
@@ -187,9 +176,6 @@ class AdapterDataLaporan(
             tvLayanan.text = laporan.namaLayanan ?: "Unknown Service"
             tvTotalAmount.text = formatCurrency(laporan.totalHarga ?: 0)
 
-            // Set additional services text - tampilkan total saja
-            tvAdditionalServices?.text = getAdditionalServicesText(laporan)
-
             // Setup long click untuk delete
             setupLongClickDelete(itemView, position)
 
@@ -200,9 +186,9 @@ class AdapterDataLaporan(
         }
     }
 
-    // Helper function untuk format tanggal pengambilan - DIMODIFIKASI
+    // Helper function untuk format tanggal pengambilan
     private fun formatTanggalPengambilan(tanggalPengambilan: String?): String {
-        // Jika tanggal pengambilan kosong atau null, return string kosong (bukan "Belum diambil")
+        // Jika tanggal pengambilan kosong atau null, return string kosong
         if (tanggalPengambilan.isNullOrEmpty()) return ""
 
         return try {
@@ -253,11 +239,7 @@ class AdapterDataLaporan(
         private val tvDateTime: TextView = itemView.findViewById(R.id.tvDateTime)
         private val tvLayanan: TextView = itemView.findViewById(R.id.tvLayanan)
         private val tvTotalAmount: TextView = itemView.findViewById(R.id.tvTotalAmount)
-        private val tvAdditionalServices: TextView? = try {
-            itemView.findViewById(R.id.tvAdditionalServices)
-        } catch (e: Exception) {
-            null
-        }
+
         private val tvTanggalPengambilan: TextView? = try {
             itemView.findViewById(R.id.tvTanggalPengambilan)
         } catch (e: Exception) {
@@ -270,10 +252,7 @@ class AdapterDataLaporan(
             tvLayanan.text = laporan.namaLayanan ?: "Unknown Service"
             tvTotalAmount.text = formatCurrency(laporan.totalHarga ?: 0)
 
-            // Set additional services text - tampilkan total saja
-            tvAdditionalServices?.text = getAdditionalServicesText(laporan)
-
-            // Set tanggal pengambilan - tidak akan menampilkan "Belum diambil"
+            // Set tanggal pengambilan
             val tanggalPengambilanText = formatTanggalPengambilan(laporan.tanggalPengambilan)
             tvTanggalPengambilan?.text = tanggalPengambilanText
 

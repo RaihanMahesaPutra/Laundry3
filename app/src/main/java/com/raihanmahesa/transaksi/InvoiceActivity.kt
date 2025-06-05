@@ -280,22 +280,50 @@ class InvoiceActivity : AppCompatActivity() {
 
         val status = determinePaymentStatus(metodePembayaran)
 
-        // Konversi layanan tambahan ke format yang bisa disimpan
-        val layananTambahanMap = mutableMapOf<String, Any>()
+        // Konversi layanan tambahan ke format yang bisa disimpan - DIPERBAIKI
+        val layananTambahanMap = mutableMapOf<String, String>()
 
         // Set default values untuk layanan tambahan
         layananTambahanMap["parfum"] = "Tidak"
         layananTambahanMap["setrika"] = "Tidak"
         layananTambahanMap["antar"] = "Tidak"
 
+        // Debug log
+        android.util.Log.d("InvoiceDebug", "Processing ${tambahanList.size} additional services:")
+
         // Update berdasarkan layanan tambahan yang dipilih
         tambahanList.forEach { tambahan ->
-            when (tambahan.namaTambahan?.lowercase()) {
-                "parfum" -> layananTambahanMap["parfum"] = "Ya"
-                "setrika" -> layananTambahanMap["setrika"] = "Ya"
-                "antar jemput", "antar" -> layananTambahanMap["antar"] = "Ya"
+            val namaLayanan = tambahan.namaTambahan?.lowercase()?.trim() ?: ""
+            android.util.Log.d("InvoiceDebug", "Processing service: '$namaLayanan'")
+
+            when {
+                namaLayanan.contains("parfum") -> {
+                    // Untuk parfum, simpan jenis parfumnya (bukan hanya "Ya")
+                    layananTambahanMap["parfum"] = tambahan.namaTambahan ?: "Ya"
+                    android.util.Log.d("InvoiceDebug", "Set parfum to: ${tambahan.namaTambahan}")
+                }
+                namaLayanan.contains("setrika") -> {
+                    layananTambahanMap["setrika"] = "Ya"
+                    android.util.Log.d("InvoiceDebug", "Set setrika to: Ya")
+                }
+                namaLayanan.contains("antar") || namaLayanan.contains("jemput") -> {
+                    layananTambahanMap["antar"] = "Ya"
+                    android.util.Log.d("InvoiceDebug", "Set antar to: Ya")
+                }
                 // Tambahkan layanan tambahan lainnya sesuai kebutuhan
+                namaLayanan.contains("express") -> {
+                    layananTambahanMap["express"] = "Ya"
+                }
+                namaLayanan.contains("plastik") -> {
+                    layananTambahanMap["plastik"] = "Ya"
+                }
             }
+        }
+
+        // Debug log hasil akhir
+        android.util.Log.d("InvoiceDebug", "Final layanan tambahan mapping:")
+        layananTambahanMap.forEach { (key, value) ->
+            android.util.Log.d("InvoiceDebug", "$key: $value")
         }
 
         val newLaporan = model_laporan(
@@ -305,10 +333,13 @@ class InvoiceActivity : AppCompatActivity() {
             namaLayanan = namaLayanan,
             totalHarga = totalHarga,
             status = status,
-            // Tambahkan field layanan tambahan
-            parfum = layananTambahanMap["parfum"] as? String,
-            setrika = layananTambahanMap["setrika"] as? String,
-            antar = layananTambahanMap["antar"] as? String,
+            // Tambahkan field layanan tambahan dengan data yang sudah diperbaiki
+            parfum = layananTambahanMap["parfum"],
+            setrika = layananTambahanMap["setrika"],
+            antar = layananTambahanMap["antar"],
+            // Tambahkan field lainnya jika ada
+            // express = layananTambahanMap["express"],
+            // plastik = layananTambahanMap["plastik"],
             // tanggalPengambilan akan diset ketika status berubah ke SELESAI
             tanggalPengambilan = null
         )
@@ -317,9 +348,11 @@ class InvoiceActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance().getReference("Laporan")
         database.child(noTransaksi).setValue(newLaporan)
             .addOnSuccessListener {
+                android.util.Log.d("InvoiceDebug", "Data saved successfully to Firebase")
                 showToast(this.getString(R.string.firebase_success_message))
             }
-            .addOnFailureListener {
+            .addOnFailureListener { exception ->
+                android.util.Log.e("InvoiceDebug", "Failed to save data to Firebase", exception)
                 showToast(this.getString(R.string.firebase_failure_message))
             }
     }

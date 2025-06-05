@@ -1,7 +1,9 @@
 package com.raihanmahesa
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -24,6 +26,13 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var sharedPreferences: SharedPreferences
+
+    // Constants
+    private val PREF_NAME = "LoginPrefs"
+    private val KEY_USER_NAME = "userName"
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +45,18 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Inisialisasi SharedPreferences
+        sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
         val tvDate = findViewById<TextView>(R.id.tvDate)
         tvDate.text = getCurrentDate()
 
         val tvGreeting = findViewById<TextView>(R.id.tvGreeting)
         tvGreeting.text = getGreetingMessage()
+
+        // Menampilkan username
+        val tvUsername = findViewById<TextView>(R.id.tvUsername)
+        displayUsername(tvUsername)
 
         val pelangganMenu = findViewById<LinearLayout>(R.id.pelanggan_menu)
         pelangganMenu.setOnClickListener {
@@ -88,6 +104,25 @@ class MainActivity : AppCompatActivity() {
         akunMenu.setOnClickListener {
             val intent = Intent(this, DataAkunActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun displayUsername(tvUsername: TextView) {
+        // Coba ambil username dari Intent extra terlebih dahulu
+        val usernameFromIntent = intent.getStringExtra("nama")
+
+        if (!usernameFromIntent.isNullOrEmpty()) {
+            // Jika ada username dari intent, gunakan itu
+            tvUsername.text = "$usernameFromIntent!"
+        } else {
+            // Jika tidak ada dari intent, ambil dari SharedPreferences
+            val usernameFromPrefs = sharedPreferences.getString(KEY_USER_NAME, "")
+            if (!usernameFromPrefs.isNullOrEmpty()) {
+                tvUsername.text = "Halo, $usernameFromPrefs!"
+            } else {
+                // Fallback jika tidak ada username
+                tvUsername.text = "Halo, Pengguna!"
+            }
         }
     }
 

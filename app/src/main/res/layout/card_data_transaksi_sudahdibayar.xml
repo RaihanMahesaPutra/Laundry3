@@ -94,24 +94,11 @@
                 android:textColor="#212121"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/tvAdditionalServices"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cvLaundryIcon"
                 app:layout_constraintTop_toTopOf="@id/cvLaundryIcon"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
-                android:id="@+id/tvAdditionalServices"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="+2 Layanan Tambahan"
-                android:textColor="#757575"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/cvLaundryIcon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cvLaundryIcon"
-                app:layout_constraintTop_toBottomOf="@id/tvLayanan" />
 
             <!-- Divider -->
             <View

@@ -112,10 +112,10 @@
     <string name="KirimWhatsApp">Kirim WhatsApp</string>
     <string name="Cetak">Cetak</string>
     <string name="SubtotalTambahan">Subtotal Tambahan</string>
-    <string name="greeting_morning">Selamat Pagi</string>
-    <string name="greeting_afternoon">Selamat Siang</string>
-    <string name="greeting_evening">Selamat Sore</string>
-    <string name="greeting_night">Selamat Malam</string>
+    <string name="greeting_morning">Selamat Pagi,</string>
+    <string name="greeting_afternoon">Selamat Siang,</string>
+    <string name="greeting_evening">Selamat Sore,</string>
+    <string name="greeting_night">Selamat Malam,</string>
     <string name="Silakanloginuntukmelanjutkan">Silakan login untuk melanjutkan</string>
     <string name="SelamatDatang">Selamat Datang</string>
     <string name="Password">Password</string>
