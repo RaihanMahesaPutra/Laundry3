@@ -36,3 +36,11 @@ Aplikasi yang digunakan untuk mempermuddah pengguna menggunakan jasa laundry
 | Hasil Transaksi | Konfirmasi Transaksi | Pembayaran | Invoice |
 |------|-------|----------|------|
 |![WhatsApp Image 2025-06-10 at 9 20 24 AM (2)](https://github.com/user-attachments/assets/e243ad5b-258f-4015-9b0d-8a3ea07c967c) | ![WhatsApp Image 2025-06-10 at 9 20 23 AM](https://github.com/user-attachments/assets/a3314446-d7d2-4412-b35c-d5e4cd846c35) | ![WhatsApp Image 2025-06-10 at 9 20 23 AM (1)](https://github.com/user-attachments/assets/9f6dc786-cf48-4c18-8046-46f55def8a7f) | ![WhatsApp Image 2025-06-10 at 9 20 23 AM (2)](https://github.com/user-attachments/assets/4a15fd46-f365-4a8f-8027-21ff0653fb3d)
+
+| Chat Wahtsapp | Dialogmod Pelanggan | Dialogmod Pegawai | Edit Pelanggan |
+|------|-------|----------|------|
+|![WhatsApp Image 2025-06-10 at 9 20 22 AM](https://github.com/user-attachments/assets/325a899b-4679-4a16-a0a2-7b7c7f67e1ca) | ![WhatsApp Image 2025-06-10 at 10 20 40 AM](https://github.com/user-attachments/assets/fe4f585d-f96e-4f30-8f46-f492bc89e9bb) | ![WhatsApp Image 2025-06-10 at 10 20 41 AM](https://github.com/user-attachments/assets/c4eb3994-8923-4d83-bf7b-2daaf912ac60) | ![WhatsApp Image 2025-06-10 at 10 23 27 AM](https://github.com/user-attachments/assets/9d870c81-0202-4438-8e27-580607edd48b)
+
+| Edit Pegawai|
+|------|
+|![WhatsApp Image 2025-06-10 at 10 23 27 AM (1)](https://github.com/user-attachments/assets/8d1f9f43-d898-4985-9a6e-0341038ef59c) | 
