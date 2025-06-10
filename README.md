@@ -14,5 +14,4 @@ Aplikasi yang digunakan untuk mempermuddah pengguna menggunakan jasa laundry
 
 # Tampilan dari Laundry App
 ![WhatsApp Image 2025-06-10 at 9 20 25 AM](https://github.com/user-attachments/assets/342a2c1c-c335-4e2b-b2fa-810970f8d188)
-
-
+![WhatsApp Image 2025-06-10 at 9 20 23 AM](https://github.com/user-attachments/assets/1464d908-6c31-4a5b-b50e-fe957a45011f)
