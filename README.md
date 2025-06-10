@@ -13,4 +13,6 @@ Aplikasi yang digunakan untuk mempermuddah pengguna menggunakan jasa laundry
 - login dan regrister
 
 # Tampilan dari Laundry App
-![WhatsApp Image 2025-06-10 at 9 20 25 AM](https://github.com/user-attachments/assets/a19b319c-2eca-49c8-a69d-0e220f43e5d9)
+<img src="![WhatsApp Image 2025-06-10 at 9 20 25 AM](https://github.com/user-attachments/assets/4da440af-53c0-4e50-b3df-c6171ff05bd6)
+" style="width:100%; max-width:300px;" alt="login">
+
