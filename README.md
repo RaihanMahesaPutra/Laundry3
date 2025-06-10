@@ -19,6 +19,4 @@ Aplikasi yang digunakan untuk mempermuddah pengguna menggunakan jasa laundry
  
 | Pelanggan | Tambah Pelanggan | Pegawai | Tambah Pegawai |
 |------|-------|----------|------|
-| ![WhatsApp Image 2025-06-10 at 10 01 44 AM](https://github.com/user-attachments/assets/1fb2d7b0-47ab-40d7-a13e-c91e89cb4d44)
- | ![WhatsApp Image 2025-06-10 at 10 01 44 AM (1)](https://github.com/user-attachments/assets/70db201c-26ae-4bf0-ae9d-fa50eea50cd8)
- | ![WhatsApp Image 2025-06-10 at 9 20 19 AM](https://github.com/user-attachments/assets/a6e5af9c-3841-403f-a5ca-b225a94f52da) | ![WhatsApp Image 2025-06-10 at 9 20 19 AM (2)](https://github.com/user-attachments/assets/2879e37e-cf68-473c-a15b-42baf92e1520)
+| ![WhatsApp Image 2025-06-10 at 10 01 44 AM](https://github.com/user-attachments/assets/1fb2d7b0-47ab-40d7-a13e-c91e89cb4d44) | ![WhatsApp Image 2025-06-10 at 10 01 44 AM (1)](https://github.com/user-attachments/assets/70db201c-26ae-4bf0-ae9d-fa50eea50cd8) | ![WhatsApp Image 2025-06-10 at 9 20 19 AM](https://github.com/user-attachments/assets/a6e5af9c-3841-403f-a5ca-b225a94f52da) | ![WhatsApp Image 2025-06-10 at 9 20 19 AM (2)](https://github.com/user-attachments/assets/2879e37e-cf68-473c-a15b-42baf92e1520)
